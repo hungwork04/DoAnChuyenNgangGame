@@ -1,0 +1,118 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class ImpactOnPlayer : MonoBehaviour
+{
+    public Rigidbody2D rb;
+    public Collider2D collider2d;
+    [Header("put player skill manage in")]
+    public PlayerAttribute whichPlayer;
+    public float slideSpeed = 2f;// Tốc độ trượt khi va vào tường
+
+    public bool isSliding = false;
+    public bool isKnockback=false;
+    public bool isStunned = false;
+    public bool isUsingSkill = false;
+    public bool isClimbing = false;
+    public PlayerMovement playerMovement;
+    private void Awake()
+    {
+        if (playerMovement == null) playerMovement = transform.parent.parent.GetComponentInChildren<PlayerMovement>();
+        if (collider2d==null) collider2d = GetComponent<Collider2D>();
+        if (rb == null) rb = transform.parent.parent.GetComponent<Rigidbody2D>();
+    }
+    private void Start()
+    {
+        startgravityScale = rb.gravityScale;
+    }
+    private void Update()
+    {
+        if (isKnockback)
+        {
+            StartCoroutine(ResetKnockbackAfterDelay(this, 0.45f));//find other ways!!
+        }
+        if (isStunned)
+        {
+            StartCoroutine(ResetStunnedAfterDelay(this, 5f));
+        }
+        if (canClimbing==false)
+        {
+            rb.gravityScale = startgravityScale;
+        }
+    }
+    //void OnCollisionStay2D(Collision2D collision)
+    //{
+    //    // Kiểm tra va chạm với tường
+    //    if (collision.gameObject.CompareTag("Wall"))
+    //    {
+    //        isSliding = true;
+    //    }
+    //}
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            playerMovement.hasDoubleJumped = false; // Reset double jump
+            playerMovement.isCanDoubleJump = true;
+        }
+    }
+
+    public IEnumerator ResetKnockbackAfterDelay(ImpactOnPlayer impact, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (impact != null)
+        {
+            impact.isKnockback = false;
+            playerMovement.moveSpeed = playerMovement.startmoveSpeed;
+            playerMovement.jumpForce = playerMovement.startjumpForce;
+        }
+    }
+    public IEnumerator ResetStunnedAfterDelay(ImpactOnPlayer impact, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (impact != null)
+        {
+            impact.isStunned = false;
+            playerMovement.moveSpeed = playerMovement.startmoveSpeed;
+            playerMovement.jumpForce = playerMovement.startjumpForce;
+        }
+    }
+
+
+    public void blockMove(float m,float j,bool eff)
+    {
+        if (eff)
+        {
+            //Debug.Log("lockmove");
+            playerMovement.moveSpeed = 0f;
+            playerMovement.jumpForce = 0f;
+        }
+    }
+
+
+    public float climbSpeed = 5f; // Tốc độ leo thang
+    public float startgravityScale;
+    public bool canClimbing = false;
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Ladder"))
+        {
+            canClimbing = true;
+             // Vô hiệu hóa trọng lực khi leo
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Ladder"))
+        {
+            canClimbing = false;
+            isClimbing = false ;
+        }
+    }
+}
