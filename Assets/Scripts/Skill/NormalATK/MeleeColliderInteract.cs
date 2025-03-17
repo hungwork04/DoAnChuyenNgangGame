@@ -37,7 +37,7 @@ public class MeleeColliderInteract : MonoBehaviour
         }
     }
 
-    protected void DeactivateCollider()
+    protected virtual void DeactivateCollider()
     {
         if (MeleeCollider != null)
         {

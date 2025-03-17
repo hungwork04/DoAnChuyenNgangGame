@@ -11,12 +11,11 @@ public class PlayerMovement : MonoBehaviour
 
 
     public Rigidbody2D rb;
-    public bool isGrounded;
-
     public ImpactOnPlayer impactOnPlayer;
     public playerAvatar playerAvatar;
     public Animator ani;
 
+    public bool isGrounded;
     public bool facingRight = true;
     public bool isJumping = false;
     public bool isFalling = false;
@@ -24,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
     public float originMass;
 
     private Vector2 movementInput;
-    //public Transform Ava;
     public PlayerAby playerAby;
     public SpriteRenderer PlayerColor;
     private Color originalColor;
