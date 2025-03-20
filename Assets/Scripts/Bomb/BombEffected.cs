@@ -29,7 +29,6 @@ public class BombEffected : MonoBehaviour
             {
                 coltrans = coltrans.parent;
             }
-
             Rigidbody2D rigid = coltrans.GetComponent<Rigidbody2D>();
             
             if (rigid != null)

@@ -36,4 +36,8 @@ public class BombBounce : MonoBehaviour
         var direction = Vector3.Reflect(lastVelocity.normalized, collision.contacts[0].normal);
         rb.velocity = direction * Speed* 0.7f;
     }
+    private void OnEnable()
+    {
+        this.GetComponent<Transform>().localScale=new Vector3(0.8f,0.8f,0.8f);
+    }
 }

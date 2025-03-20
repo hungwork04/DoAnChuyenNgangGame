@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627376b2b8395c5489f852a0c6cd28db, type: 3}
-  m_Name: GroundPoundSkill
+  m_Script: {fileID: 11500000, guid: 1f79ce0cd42ff324181da462dc5f45ee, type: 3}
+  m_Name: GrowUpSkill
   m_EditorClassIdentifier: 
-  skillName: GroundPoundSkill
-  cooldown: 0.5
-  activeTime: 0.4
-  damage: 20
+  skillName: GrowUpSkill
+  cooldown: 13
+  damage: 0

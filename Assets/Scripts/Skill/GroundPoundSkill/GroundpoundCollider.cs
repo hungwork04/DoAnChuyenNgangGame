@@ -10,6 +10,7 @@ public class GroundpoundCollider : MeleeColliderInteract
     public PlayerMovement playerMovement;
     public bool isDashDown = false;
     protected Collider2D playerCol;
+    public GameObject groundPoundEff;
     private void Start()
     {
         if (ava == null) ava = transform.parent.GetComponentInParent<playerAvatar>();
@@ -38,14 +39,26 @@ public class GroundpoundCollider : MeleeColliderInteract
         playerCol.usedByEffector = false;
         StopDash();
     }
-
+    public LayerMask groundLayer;
     private void StopDash()
     {
+        Vector2 groundPoint = rb.transform.position; // Mặc định là vị trí nhân vật
+
+        // Tìm vị trí chạm đất bằng Raycast
+        RaycastHit2D hit = Physics2D.Raycast(rb.transform.position, Vector2.down, 1.5f, groundLayer);
+        if (hit.collider != null)
+        {
+            groundPoint = hit.point; // Lấy vị trí chính xác trên mặt đất
+            Debug.Log("point");
+        }
+        Vector2 editGroundPoint = new Vector2(groundPoint.x, groundPoint.y +0.3f);
+        var eff = Instantiate(groundPoundEff, editGroundPoint, Quaternion.identity);
         Debug.Log("Dừng dásh");
         playerMovement.isDashing = false;
         rb.velocity = Vector2.zero;
         rb.gravityScale = 1;
         base.ActivateCollider(dashtime, 10); // Gọi base khi dash kết thúc
+        //Destroy(eff);
     }
 
     public override void ActivateCollider(float duration, int skillDamage)

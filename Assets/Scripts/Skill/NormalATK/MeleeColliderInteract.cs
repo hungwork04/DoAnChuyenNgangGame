@@ -72,6 +72,7 @@ public class MeleeColliderInteract : MonoBehaviour
             {
                 //resetBombWhileHandle(rigid);
                 resetPlayerBombHandle(coltrans);
+                Debug.Log(coltrans.name);
                 var impact = coltrans.gameObject.GetComponentInChildren<ImpactOnPlayer>();// Trường hợp nếu tấn công player
                 if (impact != null && impact != this.transform.parent.GetComponentInChildren<ImpactOnPlayer>())
                 {

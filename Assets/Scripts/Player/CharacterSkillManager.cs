@@ -69,11 +69,18 @@ public class CharacterSkillManager : MonoBehaviour
         // Kích hoạt kỹ năng
         if (skill != null)
         {
-            avatar.avatarList[avatar.index].GetComponent<Animator>().SetTrigger("isSkill1");//ifelse de doi animation
+            if (skillIndex == 0)
+            {
+                avatar.avatarList[avatar.index].GetComponent<Animator>().SetTrigger("isSkill1");//ifelse de doi animation
+            }
+            else if (skillIndex == 1 &&(avatar.index!=0 || avatar.index != 3))
+            {
+                avatar.avatarList[avatar.index].GetComponent<Animator>().SetTrigger("isSkill2");//ifelse de doi animation
+            }
             var user = avatar.avatarList[avatar.index];
             skill.Activate(user);
             cooldownTimers[skillIndex] = skill.cooldown;
-            Debug.Log($"Activated skill: {skill.skillName}");
+            //Debug.Log($"Activated skill: {skill.skillName}");
         }
     }
 }

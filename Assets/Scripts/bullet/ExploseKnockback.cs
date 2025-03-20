@@ -17,11 +17,11 @@ public class ExploseKnockback : BombEffected
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("here");
+        //Debug.Log("here");
         if ((targetLayers.value & (1 << collision.gameObject.layer)) != 0)
         {
             effectImpact(collision);
-            Debug.Log("here");
+            //Debug.Log("here");
         }
     }
 

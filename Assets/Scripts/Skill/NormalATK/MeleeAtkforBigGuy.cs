@@ -31,7 +31,7 @@ public class MeleeAtkforBigGuy : MeleeColliderInteract
 
             if (rigid != null && rigid.gameObject != this.transform.parent.parent.parent.gameObject)
             {
-                Debug.Log(rigid.gameObject);
+                //Debug.Log(rigid.gameObject);
                 //resetBombWhileHandle(rigid);
                 resetPlayerBombHandle(coltrans);
                 var impact = coltrans.gameObject.GetComponentInChildren<ImpactOnPlayer>();// Trường hợp nếu tấn công player

@@ -16,6 +16,11 @@ public class ImpactOnPlayer : MonoBehaviour
     public bool isStunned = false;
     public bool isUsingSkill = false;
     public bool isClimbing = false;
+    public bool isSlowed = false;
+    public bool isTouchingWall=false;
+    public float wallContactTime = 0f;
+
+    public Coroutine currSlowedCorou;
     public PlayerMovement playerMovement;
     private void Awake()
     {
@@ -41,24 +46,62 @@ public class ImpactOnPlayer : MonoBehaviour
         {
             rb.gravityScale = startgravityScale;
         }
+
+        if (isTouchingWall && wallContactTime > 0.5f && playerMovement.isGrounded == false)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, -2);
+            isSliding = true;
+        }
+        else
+        {
+            isSliding = false;
+        }
     }
-    //void OnCollisionStay2D(Collision2D collision)
-    //{
-    //    // Kiểm tra va chạm với tường
-    //    if (collision.gameObject.CompareTag("Wall"))
-    //    {
-    //        isSliding = true;
-    //    }
-    //}
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        // Kiểm tra va chạm với tường
+        if (collision.gameObject.CompareTag("Wall") && playerMovement.isGrounded==false)
+        {
+            isTouchingWall = true;
+            wallContactTime += Time.deltaTime;
+        }
+    }
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
             playerMovement.hasDoubleJumped = false; // Reset double jump
             playerMovement.isCanDoubleJump = true;
+            isTouchingWall=false;
+            wallContactTime = 0;
         }
     }
+    public IEnumerator beSlowed(Transform coltrans)
+    {
+        var impact = coltrans.gameObject.GetComponentInChildren<ImpactOnPlayer>();
+        if (impact == null) yield break; // Thoát sớm nếu không tìm thấy ImpactOnPlayer
 
+        var plyerMovement = impact.playerMovement;
+        if (plyerMovement == null) yield break; // Thoát nếu không có PlayerMovement
+        plyerMovement.moveSpeed -=0.4f;
+        isSlowed = true;
+        yield return new WaitForSeconds(10f);
+        Debug.Log("hết time");
+        plyerMovement.moveSpeed = plyerMovement.startmoveSpeed;
+        isSlowed = false;
+
+    }
+    public void startSlowed(Transform coltrans)
+    {
+        if (currSlowedCorou != null)
+        {
+            StopCoroutine(currSlowedCorou);
+            //Debug.Log("xóa cor");
+            currSlowedCorou = null;
+        }
+        //Debug.Log(currSlowedCorou?.ToString());
+        currSlowedCorou = StartCoroutine(beSlowed(coltrans));
+    }
     public IEnumerator ResetKnockbackAfterDelay(ImpactOnPlayer impact, float delay)
     {
         yield return new WaitForSeconds(delay);
