@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f689fc30bbae1f540a7ef10825ac95ef, type: 3}
-  m_Name: Cucumber
+  m_Script: {fileID: 11500000, guid: 445f713d648e83f41a449c12be0d6fad, type: 3}
+  m_Name: ShapeshiftSkill
   m_EditorClassIdentifier: 
-  characterName: Cucumber
-  skills:
-  - {fileID: 11400000, guid: 1f12bbd85e6e13e42b64d11534592a0c, type: 2}
-  - {fileID: 11400000, guid: 9b0926288a3c0114cb07a2f959de8652, type: 2}
+  skillName: ShapeShitSkill
+  cooldown: 17
+  activeTime: 15

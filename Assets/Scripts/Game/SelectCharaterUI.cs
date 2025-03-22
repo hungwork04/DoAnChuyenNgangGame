@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 
 using UnityEngine;
@@ -120,16 +121,24 @@ public class SelectCharaterUI : MonoBehaviour
         int dex = playerBtn.IndexOf(selectedPlayerBtn.GetComponent<Button>());
         selectedPlayerBtn.transform.Find("plimg").GetComponent<Image>().color = PlayerCharacter.GetComponent<Image>().color;
         try {
+            CharacterSkillManager chaSkillMana = playerJM.danhsach[dex].GetComponentInChildren<CharacterSkillManager>();
             playerAvatar ava = playerJM.danhsach[dex].GetComponentInChildren<playerAvatar>();
             ava.plcl = PlayerCharacter.GetComponent<Image>().color;
             ava?.setAva(currentCharractIndex);
             playerJM.playerDevicesInfo[dex].characterType = currentCharractIndex;
             playerJM.playerDevicesInfo[dex].playercolor = PlayerCharacter.GetComponent<Image>().color;
+            chaSkillMana.currentCharacter =ava.GetComponentInChildren<ImpactOnPlayer>().whichPlayer;
+            chaSkillMana.cooldownTimers[0] = chaSkillMana.currentCharacter.skills[0].cooldown;
+            chaSkillMana.cooldownTimers[1] = chaSkillMana.currentCharacter.skills[1].cooldown;
             Debug.Log(PlayerCharacter.GetComponent<Image>().color);
         }
-        catch (ArgumentOutOfRangeException)
+        catch (ArgumentOutOfRangeException  )
         {
             Debug.Log("k toonf tai!!");
+        }
+        catch (IndexOutOfRangeException)
+        {
+            Debug.Log("skill2 k cos");
         }
         //đổi characterType
     }

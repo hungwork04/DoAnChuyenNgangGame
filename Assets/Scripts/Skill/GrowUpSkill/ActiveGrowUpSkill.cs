@@ -22,7 +22,7 @@ public class ActiveGrowUpSkill : MonoBehaviour
     }
     public IEnumerator growUp()
     {
-        Debug.Log("Chạy vào đây1");
+        //Debug.Log("Chạy vào đây1");
         isProcessing = true;
         interactCol2d.enabled=true;
         for (int i = 0; i < 3; i++)
@@ -38,11 +38,14 @@ public class ActiveGrowUpSkill : MonoBehaviour
                 }
                 yield return null;
             }
-            Debug.Log(parentObj.localScale);
+            //Debug.Log(parentObj.localScale);
             yield return new WaitForSeconds(0.5f);
         }
+        resetPlayerBombHandle(parentObj);
+        StartCoroutine(DecreaseCountDownSkill(parentObj));
         yield return new WaitForSeconds(GrowUpRemainTime);
-        //resetPlayerBombHandle(parentObj);
+        //StartCoroutine(ignoreBombVsInteractColinSecond(parentObj));
+
         while (originalScale.x < targetScale.x)
         {
             parentObj.localScale = Vector3.Lerp(targetScale, originalScale, growSpeed);
@@ -53,12 +56,25 @@ public class ActiveGrowUpSkill : MonoBehaviour
             }
             yield return null;
         }
-        Debug.Log("Chạy vào đây4");
+        //Debug.Log("Chạy vào đây4");
         targetScale = originalScale;
         isProcessing = false;
         interactCol2d.enabled = false;
 
     }
+    //public IEnumerator ignoreBombVsInteractColinSecond(Transform coltrans)
+    //{
+    //    var aby = coltrans.gameObject.GetComponentInChildren<PlayerAby>();
+    //    if (aby != null)
+    //    {
+    //        if (aby.Object != null)
+    //        {
+    //            Physics2D.IgnoreCollision(aby.Object.GetComponent<Collider2D>(), interactCol2d, true);
+    //        }
+    //    }
+    //    yield return new WaitUntil(()=>aby.Object == null);
+    //    Debug.Log("ignore");
+    //}
     public void resetPlayerBombHandle(Transform coltrans)
     {
         var aby = coltrans.gameObject.GetComponentInChildren<PlayerAby>();
@@ -66,6 +82,8 @@ public class ActiveGrowUpSkill : MonoBehaviour
         {
             if (aby.Object != null)
             {
+                //Physics2D.IgnoreCollision(aby.Object.GetComponent<Collider2D>(), interactCol2d, true);
+
                 var rigid = aby.Object.GetComponentInParent<Rigidbody2D>();
                 if (rigid == null) return;
                 rigid.bodyType = RigidbodyType2D.Dynamic;
@@ -76,6 +94,27 @@ public class ActiveGrowUpSkill : MonoBehaviour
             }
             aby.Object = null;
             aby.isholdBomb = false;
+        }
+    }
+
+    public IEnumerator DecreaseCountDownSkill(Transform colTrans)
+    {
+        if (colTrans == null) yield break; // Kiểm tra null tránh lỗi
+
+        var chaSkill = colTrans.GetComponentInChildren<CharacterSkillManager>();
+        Debug.Log("Giamr hooi chiue");
+        if (chaSkill == null || chaSkill.cooldownTimers == null || chaSkill.cooldownTimers.Length == 0)
+            yield break; // Thoát nếu không có cooldownTimers
+
+        float startCountDown = chaSkill.cooldownTimers[0];
+        chaSkill.cooldownTimers[0] = 0.5f;
+        Debug.Log("Giamr hooi chiue");
+        yield return new WaitUntil(() => !isProcessing); // Cách viết tốt hơn
+
+        // Kiểm tra lần nữa tránh lỗi nếu chaSkill bị xóa trong lúc chờ
+        if (chaSkill != null && chaSkill.cooldownTimers != null && chaSkill.cooldownTimers.Length > 0)
+        {
+            chaSkill.cooldownTimers[0] = startCountDown;
         }
     }
 }

@@ -55,6 +55,10 @@ public class ImpactOnPlayer : MonoBehaviour
         else
         {
             isSliding = false;
+        }if((!isKnockback||!isStunned)&&(playerMovement.moveSpeed == 0f||playerMovement.jumpForce == 0f))
+        {
+            playerMovement.moveSpeed = playerMovement.startmoveSpeed;
+            playerMovement.jumpForce = playerMovement.startjumpForce;
         }
     }
     void OnCollisionStay2D(Collision2D collision)
@@ -62,8 +66,15 @@ public class ImpactOnPlayer : MonoBehaviour
         // Kiểm tra va chạm với tường
         if (collision.gameObject.CompareTag("Wall") && playerMovement.isGrounded==false)
         {
-            isTouchingWall = true;
             wallContactTime += Time.deltaTime;
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Wall") && playerMovement.isGrounded == false)
+        {
+            isTouchingWall = true;
+           
         }
     }
     private void OnCollisionExit2D(Collision2D collision)

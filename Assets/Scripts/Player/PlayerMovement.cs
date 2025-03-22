@@ -166,6 +166,13 @@ public class PlayerMovement : MonoBehaviour
             hasDoubleJumped = true; // Đánh dấu đã double jump
             isCanDoubleJump = false;
         }
+        else if (impactOnPlayer.isTouchingWall)
+        {
+            rb.velocity = new Vector2(-Mathf.Sign(playerAvatar.transform.localScale.x) * 8, jumpForce);
+            impactOnPlayer.wallContactTime = 0f; // Reset thời gian va chạm
+            Debug.Log("bật lùi");
+            //SetMovementInput(Vector2.zero);
+        }
 
     }
 
@@ -190,7 +197,7 @@ public class PlayerMovement : MonoBehaviour
         ani.SetBool("isJumping", isJumping);
         ani.SetBool("isFalling", isFalling);
     }
-
+    
     // Lật nhân vật
     private void Flip()
     {

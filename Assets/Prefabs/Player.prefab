@@ -953,10 +953,11 @@ Transform:
   m_GameObject: {fileID: 2335389592142066584}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.69, y: 3.3, z: 0}
+  m_LocalPosition: {x: 4.17, y: 2.96, z: 0}
   m_LocalScale: {x: 0.85, y: 0.85, z: 0.85}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2906574356945240813}
   - {fileID: 4667006844098109375}
   - {fileID: 4019407149274497529}
   - {fileID: 3977715518784405623}
@@ -1065,7 +1066,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9171338149722616924
 Transform:
   m_ObjectHideFlags: 0
@@ -1888,6 +1889,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCharacter: {fileID: 11400000, guid: 00ccb354cbc5ff640856c2a1834e211e, type: 2}
   avatar: {fileID: 5630628471768476933}
+  cooldownTimers:
+  - 0
+  - 0
+  currCooldownTimers:
+  - 0
+  - 0
 --- !u!1 &5273150574602787191
 GameObject:
   m_ObjectHideFlags: 0
@@ -2274,7 +2281,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6753581938967069417
 Transform:
   m_ObjectHideFlags: 0
@@ -2815,6 +2822,42 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 00d0c408-3b6a-48c4-8111-646f019c938e
     m_ActionName: PlayerMovement/Attack2[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3059192826493349461, guid: f3578911729477042829b3f21b3c1b3b, type: 3}
+        m_TargetAssemblyTypeName: SpiritMovement, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1f204586-8f4a-4314-96d3-75e2a6ec7e0c
+    m_ActionName: SpiritMovement/Movement[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 487a5504-d01a-46e1-8d01-4e5d6009bbe1
+    m_ActionName: SpiritMovement/Jump[/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: de190e6b-80ad-4613-b658-b466d27dee74
+    m_ActionName: SpiritMovement/Throw[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8f04e5e9-baf4-47d7-813a-512adb474001
+    m_ActionName: SpiritMovement/Pick[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e5a863f3-2f2b-491a-9882-70df1a0b33bb
+    m_ActionName: SpiritMovement/NormalAttack[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a65dc13d-0192-4b5a-b763-0ffc83e8ed00
+    m_ActionName: SpiritMovement/Attack2[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerMovement
@@ -3538,6 +3581,102 @@ MonoBehaviour:
   invincibleTime: 5
   blinkInterval: 0.1
   spriteRenderer: {fileID: 0}
+--- !u!1 &7845008146126050267
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2906574356945240813}
+  - component: {fileID: 2247764615950066597}
+  - component: {fileID: 3366318083604238394}
+  m_Layer: 0
+  m_Name: ActiveShapeSkill(cucumber)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2906574356945240813
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7845008146126050267}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.018999996, y: -0.060000136, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2620139263524717444}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &2247764615950066597
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7845008146126050267}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.46861163, y: -0.0075583905}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.88914543, y: 0.57169914}
+  m_EdgeRadius: 0
+--- !u!114 &3366318083604238394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7845008146126050267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ecbe48277941a4c9f5c2bf47ba98dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colActive: {fileID: 2247764615950066597}
+  CopiedPlayer: {fileID: 0}
+  avatar: {fileID: 5630628471768476933}
+  playerMovement: {fileID: 5110314966547385146}
+  chaSkillmana: {fileID: 952042930891038648}
+  startPlayer: {fileID: 5783479799380201282}
 --- !u!1 &7912544814860398800
 GameObject:
   m_ObjectHideFlags: 0
@@ -3584,7 +3723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fea0067a8c68a2a459b4734a816d4cae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GrowUpRemainTime: 5
+  GrowUpRemainTime: 10
   originalScale: {x: 0, y: 0, z: 0}
   targetScale: {x: 1.6, y: 1.6, z: 1.6}
   growSpeed: 1
