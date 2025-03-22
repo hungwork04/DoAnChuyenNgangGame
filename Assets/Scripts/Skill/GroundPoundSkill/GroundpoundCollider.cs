@@ -29,7 +29,7 @@ public class GroundpoundCollider : MeleeColliderInteract
         {
             playerCol.usedByEffector = true;
         }
-        rb.velocity = new Vector2(0f, -dashingPower * 1.5f);
+        rb.linearVelocity = new Vector2(0f, -dashingPower * 1.5f);
         
         while (!playerMovement.isGrounded && playerMovement.isDashing)
         {
@@ -43,7 +43,7 @@ public class GroundpoundCollider : MeleeColliderInteract
     {
         Debug.Log("Dừng dásh");
         playerMovement.isDashing = false;
-        rb.velocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
         rb.gravityScale = 1;
         base.ActivateCollider(dashtime, 10); // Gọi base khi dash kết thúc
     }
@@ -90,7 +90,7 @@ public class GroundpoundCollider : MeleeColliderInteract
                 if (processedRigidbodies.Add(rigid.transform))
                 {
                     Vector2 throwDirection = -transform.parent.parent.position+ rigid.transform.position;//player
-                    rigid.velocity = Vector2.zero;
+                    rigid.linearVelocity = Vector2.zero;
                     rigid.AddForce(throwDirection.normalized *20* rigid.mass, ForceMode2D.Impulse);
                     processedRigidbodies.Add(rigid.transform);
                     Debug.Log("Force applied to: " + rigid.gameObject.name);

@@ -27,13 +27,13 @@ public class BombBounce : MonoBehaviour
     Vector3 lastVelocity;
     private void Update()
     {
-        lastVelocity = rb.velocity;
+        lastVelocity = rb.linearVelocity;
     }
     void Bounce(Collision2D collision)
     {
         // Lấy vector hướng va chạm của quả bom
         var Speed = lastVelocity.magnitude;
         var direction = Vector3.Reflect(lastVelocity.normalized, collision.contacts[0].normal);
-        rb.velocity = direction * Speed* 0.7f;
+        rb.linearVelocity = direction * Speed* 0.7f;
     }
 }

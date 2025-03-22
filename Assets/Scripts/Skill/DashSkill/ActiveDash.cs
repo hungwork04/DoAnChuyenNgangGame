@@ -23,9 +23,9 @@ public class ActiveDash : MonoBehaviour
 
         // Tạm thời vô hiệu hóa trọng lực và ma sát
         rb.gravityScale = 0;
-        rb.velocity=Vector2.zero;
+        rb.linearVelocity=Vector2.zero;
         // Lấy hướng Dash (trái hoặc phải)
-        rb.velocity = new Vector2(ava.transform.localScale.x * dashingPower*1.5f, 0f);
+        rb.linearVelocity = new Vector2(ava.transform.localScale.x * dashingPower*1.5f, 0f);
 
         // Debug thông tin vận tốc để kiểm tra
 
@@ -33,7 +33,7 @@ public class ActiveDash : MonoBehaviour
         yield return new WaitForSeconds(dashtime*0.5f);
         // Khôi phục trọng lực và ma sát
         playerMovement.isDashing = false;
-        rb.velocity = Vector2.zero;
+        rb.linearVelocity = Vector2.zero;
         rb.gravityScale = originalGravity;
 
         //Debug.Log("Dash hoàn tất");

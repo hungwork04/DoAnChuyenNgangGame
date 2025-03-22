@@ -180,7 +180,7 @@ public class PlayerAby : MonoBehaviour
             }
 
             // Thêm lực ném
-            bombRigidbody.velocity = Vector2.zero; // Reset vận tốc trước khi thêm lực
+            bombRigidbody.linearVelocity = Vector2.zero; // Reset vận tốc trước khi thêm lực
             bombRigidbody.AddForce(throwDirection * throwForce, ForceMode2D.Impulse);
 
             var bombani = Object.transform.parent.GetComponentInChildren<BombController>();
