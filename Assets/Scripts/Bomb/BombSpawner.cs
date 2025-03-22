@@ -60,7 +60,7 @@ public class BombSpawner : MonoBehaviour
             GetObjectFromPool(0,2);
             GetObjectFromPool(2,4);
             GetObjectFromPool(4,6);
-            GetObjectFromPool(6,8);
+            //GetObjectFromPool(6,8);
         }
     }
     public Transform RandomPos(int start, int end)

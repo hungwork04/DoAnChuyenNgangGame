@@ -132,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!impactOnPlayer.isKnockback && isDashing==false&&impactOnPlayer.isUsingSkill==false)
         {
-            rb.velocity = new Vector2(movementInput.x * moveSpeed, rb.velocity.y);
+            rb.linearVelocity = new Vector2(movementInput.x * moveSpeed, rb.linearVelocity.y);
             if (movementInput.x > 0 && !facingRight)
             {
                 Flip();
@@ -143,7 +143,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
-        ani.SetFloat("xVelocity", Mathf.Abs(rb.velocity.x));
+        ani.SetFloat("xVelocity", Mathf.Abs(rb.linearVelocity.x));
     }
 
     public bool isCanDoubleJump = false; // Biến để kiểm tra khả năng double jump
@@ -155,20 +155,20 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             // Nếu đang ở trên mặt đất, thực hiện nhảy và reset trạng thái double jump
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             hasDoubleJumped = false; // Reset double jump
             isCanDoubleJump = true;
         }
         else if (isCanDoubleJump && !hasDoubleJumped && !isGrounded)
         {
             // Nếu không ở trên mặt đất nhưng có thể double jump và chưa sử dụng double jump
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             hasDoubleJumped = true; // Đánh dấu đã double jump
             isCanDoubleJump = false;
         }
         else if (impactOnPlayer.isTouchingWall)
         {
-            rb.velocity = new Vector2(-Mathf.Sign(playerAvatar.transform.localScale.x) * 8, jumpForce);
+            rb.linearVelocity = new Vector2(-Mathf.Sign(playerAvatar.transform.localScale.x) * 8, jumpForce);
             impactOnPlayer.wallContactTime = 0f; // Reset thời gian va chạm
             Debug.Log("bật lùi");
             //SetMovementInput(Vector2.zero);
@@ -178,12 +178,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckJumpAndFallAni()
     {
-        if (!isGrounded && rb.velocity.y > 0)
+        if (!isGrounded && rb.linearVelocity.y > 0)
         {
             isJumping = true;
             isFalling = false;
         }
-        else if (!isGrounded && rb.velocity.y < 0)
+        else if (!isGrounded && rb.linearVelocity.y < 0)
         {
             isJumping = false;
             isFalling = true;
@@ -234,7 +234,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if(impactOnPlayer.isClimbing==false) return;
             rb.gravityScale=0;
-            rb.velocity = new Vector2(rb.velocity.x, impactOnPlayer.climbSpeed);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, impactOnPlayer.climbSpeed);
         }
 
     }

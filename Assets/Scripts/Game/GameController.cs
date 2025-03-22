@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour
     }
     public void loadSceneZero()
     {
-        var playerInputManager = FindObjectOfType<PlayerInputManager>();
+        var playerInputManager = FindFirstObjectByType<PlayerInputManager>();
         //var Gamedata = FindObjectOfType<GameDataManager>();
         if (playerInputManager != null)
         {

@@ -49,7 +49,7 @@ public class ImpactOnPlayer : MonoBehaviour
 
         if (isTouchingWall && wallContactTime > 0.5f && playerMovement.isGrounded == false)
         {
-            rb.velocity = new Vector2(rb.velocity.x, -2);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, -2);
             isSliding = true;
         }
         else

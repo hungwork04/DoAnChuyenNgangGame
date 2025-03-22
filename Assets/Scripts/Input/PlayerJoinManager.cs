@@ -86,7 +86,7 @@ public class PlayerJoinManager : MonoBehaviour
             //Debug.Log("Game bắt đầu! Không thể thêm người chơi mới.");
 
             GameDataManager.instance.SetPlayerDevicesInfo(playerDevicesInfo);
-            var playerInputManager = FindObjectOfType<PlayerInputManager>();
+            var playerInputManager = FindAnyObjectByType<PlayerInputManager>();
 
             if (playerInputManager != null)
             {
@@ -96,7 +96,7 @@ public class PlayerJoinManager : MonoBehaviour
             }
             //StartCoroutine(SetJoinPlayerManually());
             danhsach.Clear();
-            SceneManager.LoadScene(1); 
+            SceneManager.LoadScene(2); 
         }
         else
         {

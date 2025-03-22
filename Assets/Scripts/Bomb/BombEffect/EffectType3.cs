@@ -35,7 +35,7 @@ public class EffectType3 : BombEffected
         yield return new WaitForSeconds(0.06f);
         List<Collider2D> cols = new List<Collider2D>();
         // Kiểm tra và thêm các collider trùng lặp vào danh sách
-        polygonCollider.OverlapCollider(filter, cols);
+        polygonCollider.Overlap(filter, cols);
         foreach (Collider2D col in cols)
         {
             Transform coltrans = col.transform;

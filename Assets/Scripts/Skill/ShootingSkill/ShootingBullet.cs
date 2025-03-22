@@ -22,7 +22,7 @@ public class ShootingBullet : MonoBehaviour
         }
         //Debug.Log(PlayerVec.localScale.x);
         // Áp dụng lực vào viên đạn theo hướng bắn
-        rigid.velocity = shootDirection * shootingSpeed;
+        rigid.linearVelocity = shootDirection * shootingSpeed;
         bulletNum--;
     }
 

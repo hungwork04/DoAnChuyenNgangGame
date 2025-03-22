@@ -85,7 +85,7 @@ public class MeleeColliderInteract : MonoBehaviour
                 if (processedRigidbodies.Add(rigid.transform))
                 {
                     Vector2 throwDirection = transform.parent.parent.localScale.normalized;//player
-                    rigid.velocity = Vector2.zero;
+                    rigid.linearVelocity = Vector2.zero;
                     rigid.AddForce(throwDirection * 15 * rigid.mass, ForceMode2D.Impulse);
                     processedRigidbodies.Add(rigid.transform);
                     //Debug.Log("Force applied to: " + rigid.gameObject.name);
