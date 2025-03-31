@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 using static Unity.Burst.Intrinsics.X86;
@@ -10,6 +11,7 @@ public class CharacterSkillManager : MonoBehaviour
     public playerAvatar avatar;
     public float[] cooldownTimers = new float[2]; // Bộ đếm cooldown cho 2 kỹ năng
     public float[] currCooldownTimers = new float[2];
+    public int skillUsingIndex=-1;
     private void Awake()
     {
         if(avatar==null) avatar = transform.parent.GetComponentInChildren<playerAvatar>();
@@ -36,7 +38,8 @@ public class CharacterSkillManager : MonoBehaviour
     {
         // Giảm cooldown theo thời gian
         UpdateCooldownTimers();
-
+        //if(skillUsingIndex>0)
+        //DoAnimation(skillUsingIndex);
     }
 
     private void UpdateCooldownTimers()
@@ -61,34 +64,65 @@ public class CharacterSkillManager : MonoBehaviour
         }
 
         Skill skill = currentCharacter.skills[skillIndex];
-
         // Kiểm tra cooldown
-        if (currCooldownTimers[skillIndex] > 0)
+        if (currCooldownTimers[skillIndex] > 0 && avatar.index!=5)
         {
             Debug.Log($"Skill {skill.skillName} is on cooldown: {currCooldownTimers[skillIndex]:F1}s left.");
             return;
         }
-
+        if(avatar.index==5&& !avatar.avatarList[avatar.index].GetComponent<ImpactOnPlayer>().isUsingSkill && currCooldownTimers[skillIndex] > 0)
+        {
+            Debug.Log($"Skill {skill.skillName} is on cooldown: {currCooldownTimers[skillIndex]:F1}s left.");
+            return;
+        }
         // Kích hoạt kỹ năng
         if (skill != null)
         {
-            if (skillIndex == 0)
-            {
-                avatar.avatarList[avatar.index].GetComponent<Animator>().SetTrigger("isSkill1");//ifelse de doi animation
-            }
-            else if (skillIndex == 1 &&(avatar.index!=0 || avatar.index != 3))
-            {
-                avatar.avatarList[avatar.index].GetComponent<Animator>().SetTrigger("isSkill2");//ifelse de doi animation
-            }
+                //skillUsingIndex = skillIndex;
+            //viết thêm trường hợp skill của Whale(index=5)
+
             var user = avatar.avatarList[avatar.index];
-            skill.Activate(user);
+            skill.Activate(user);//sang active tạo bool check ấn lần 1 và 2
+            
+               // Debug.Log(avatar.index);
+
             if (cooldownTimers[skillIndex] == 0)
                 cooldownTimers[skillIndex] = skill.cooldown;
 
             // Reset currCooldownTimers để bắt đầu hồi chiêu
             currCooldownTimers[skillIndex] = cooldownTimers[skillIndex];
+                //skillUsingIndex = -1;
             //Debug.Log($"Activated skill: {skill.skillName}");
+            DoAnimation(skillIndex);
+
         }
     }
+    
+    public void DoAnimation(int skillIndex)
+    {
+        if (skillIndex == 0)
+        {
+            avatar.avatarList[avatar.index].GetComponent<Animator>().SetTrigger("isSkill1");//ifelse de doi animation
+                                                                                            //Debug.Log("here");
+        }
+        else if (skillIndex == 1 && (avatar.index == 0 || avatar.index == 3))
+        {
+            avatar.avatarList[avatar.index].GetComponent<Animator>().SetTrigger("isSkill2");//ifelse de doi animation
+            Debug.Log("here");
+        }
+        //else if (skillIndex == 1 && avatar.index == 5)
+        //{
+        //    //Debug.Log(avatar.avatarList[avatar.index]?.GetComponentInChildren<>().isLazering);
+        //    //avatar.avatarList[avatar.index].GetComponent<Animator>().SetBool("isSkill2", avatar.avatarList[avatar.index].GetComponent<ImpactOnPlayer>().isUsingSkill);
+        //    StartCoroutine(whaleAniAtk2());
+        //}
+        else return;
+    }
+    //IEnumerator whaleAniAtk2()
+    //{
+    //    avatar.avatarList[avatar.index].GetComponent<Animator>().SetBool("isSkill2",true);
+    //    yield return new WaitForSeconds(5f);
+    //    avatar.avatarList[avatar.index].GetComponent<Animator>().SetBool("isSkill2",false);
 
+    //}
 }

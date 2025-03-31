@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class waterBullet : MonoBehaviour
 {
-    public LayerMask layer;
+    //public LayerMask layer;
     public GameObject bulletExplose;
     public bool isSpawn=false;
     private void OnEnable()

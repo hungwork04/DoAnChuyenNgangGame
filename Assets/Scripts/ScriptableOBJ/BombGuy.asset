@@ -13,6 +13,4 @@ MonoBehaviour:
   m_Name: BombGuy
   m_EditorClassIdentifier: 
   characterName: BombGuy
-  skills:
-  - {fileID: 11400000, guid: 2fc65adee7e941d4aa9fba021d43438f, type: 2}
-  - {fileID: 11400000, guid: 7a59f785bc532364d95ea179058bc769, type: 2}
+  skills: []

@@ -13,6 +13,4 @@ MonoBehaviour:
   m_Name: BigGuy
   m_EditorClassIdentifier: 
   characterName: BigGuy
-  skills:
-  - {fileID: 11400000, guid: f8195d9dfc38326498339f8052ec01c9, type: 2}
-  - {fileID: 11400000, guid: c3f61733d4f82eb4eaf560af1de7273d, type: 2}
+  skills: []

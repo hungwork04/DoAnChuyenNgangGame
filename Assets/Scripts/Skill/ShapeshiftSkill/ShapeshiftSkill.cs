@@ -12,6 +12,11 @@ public class ShapeshiftSkill : Skill
         ActiveShapeShift collider = user.transform.parent.parent.GetComponentInChildren<ActiveShapeShift>();
         if (collider != null)
         {
+            if (collider.CopiedPlayer == null)
+            {
+                Debug.Log("K có đối tượng!!");
+                return;
+            }
             Debug.Log($"{collider.name} used!");
             collider.StartCoroutine(collider.activeShapeShiftSkill(activeTime));
         }

@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: Captain
   m_EditorClassIdentifier: 
   characterName: Captain
-  skills:
-  - {fileID: 11400000, guid: 33e5d3e7dcf33f54f918f15513b1db53, type: 2}
+  skills: []

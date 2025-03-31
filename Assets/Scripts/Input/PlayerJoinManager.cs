@@ -96,7 +96,7 @@ public class PlayerJoinManager : MonoBehaviour
             }
             //StartCoroutine(SetJoinPlayerManually());
             danhsach.Clear();
-            SceneManager.LoadScene(2); 
+            SceneManager.LoadScene(1); 
         }
         else
         {
@@ -104,7 +104,7 @@ public class PlayerJoinManager : MonoBehaviour
             {
                 StopCoroutine(oldco);
             }
-            Debug.LogWarning("Không thể bắt đầu game mà không có người chơi!");
+            Debug.LogWarning("Không thể bắt đầu game mà không có đủ người chơi!");
             warnText.text = "We need 2 or more players to start the game. Please connect additional devices.";
             oldco=StartCoroutine(resetwarntext());
             return;

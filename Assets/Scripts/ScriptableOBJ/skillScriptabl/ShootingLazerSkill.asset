@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f689fc30bbae1f540a7ef10825ac95ef, type: 3}
-  m_Name: Whale
+  m_Script: {fileID: 11500000, guid: 4bfa22df0c04064448185b601b68e078, type: 3}
+  m_Name: ShootingLazerSkill
   m_EditorClassIdentifier: 
-  characterName: Whale
-  skills:
-  - {fileID: 11400000, guid: 3ab16e3c802623b4d82c76cc818ead40, type: 2}
-  - {fileID: 11400000, guid: 11674e22803d8a1469142c22136f78e2, type: 2}
+  skillName: ShootingLazerSkill
+  cooldown: 10
+  activeTime: 5

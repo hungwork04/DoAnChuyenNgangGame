@@ -6,7 +6,7 @@ public class EffForBullet : BombEffected
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("có va chạm");
+        //Debug.Log("có va chạm");
         if ((targetLayers.value & (1 << collision.gameObject.layer)) != 0)
         {
             Debug.Log("Triggered effectImpact");
