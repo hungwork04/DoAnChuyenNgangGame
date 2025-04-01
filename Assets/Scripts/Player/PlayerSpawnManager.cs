@@ -62,8 +62,8 @@ public class PlayerSpawnManager : MonoBehaviour
 
             // Di chuyển nhân vật đến vị trí spawn
             Transform spawnPoint = spawnPoints[playerInfo.playerIndex];
-            player.transform.position = spawnPoint.position;
-            player.transform.rotation = spawnPoint.rotation;
+            playersp.transform.position = spawnPoint.position;
+            playersp.transform.rotation = spawnPoint.rotation;
 
 
             // Gán thiết bị điều khiển cho PlayerInput
