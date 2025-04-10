@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: BaldPirateSO
   m_EditorClassIdentifier: 
   characterName: BaldPirate
-  skills: []
+  skills:
+  - {fileID: 11400000, guid: e9e17f7f09360c94bbe2e298254ceab0, type: 2}
+  - {fileID: 11400000, guid: 4cf9158b46445ef4f8af09fa45336cbd, type: 2}

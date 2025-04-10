@@ -59,12 +59,13 @@ public class SelectCharaterUI : MonoBehaviour
     }
     public void ResetPlayersList()
     {
-        for(int i = 0; i < playerJM.playerDevicesInfo.Count; i++)
+        for (int i = 0; i < playerJM.playerDevicesInfo.Count; i++)
         {
-            playerBtn[i].GetComponentInChildren<TextMeshProUGUI>().text="Player"+ playerJM.playerDevicesInfo[i].playerIndex;
+            playerBtn[i].GetComponentInChildren<TextMeshProUGUI>().text = "Player" + playerJM.playerDevicesInfo[i].playerIndex;
             playerBtn[i].transform.Find("plimg").GetComponent<Image>().sprite = sprites[playerJM.playerDevicesInfo[i].characterType];
             //Debug.Log(playerJM.playerDevicesInfo[i].playerIndex+"__ "+ playerJM.playerDevicesInfo[i].characterType);
         }
+         selectCharacter(0);
     }
     private void changeCharacteBTN(int i)
     {
@@ -130,7 +131,7 @@ public class SelectCharaterUI : MonoBehaviour
             chaSkillMana.currentCharacter =ava.GetComponentInChildren<ImpactOnPlayer>().whichPlayer;
             chaSkillMana.cooldownTimers[0] = chaSkillMana.currentCharacter.skills[0].cooldown;
             chaSkillMana.cooldownTimers[1] = chaSkillMana.currentCharacter.skills[1].cooldown;
-            Debug.Log(PlayerCharacter.GetComponent<Image>().color);
+            //Debug.Log(PlayerCharacter.GetComponent<Image>().color);
         }
         catch (ArgumentOutOfRangeException  )
         {

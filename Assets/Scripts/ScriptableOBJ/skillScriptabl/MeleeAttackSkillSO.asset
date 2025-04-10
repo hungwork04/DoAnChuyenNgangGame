@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MeleeAttackSkillSO
   m_EditorClassIdentifier: 
   skillName: MeleeAttack
-  cooldown: 1.5
+  cooldown: 10
   activeTime: 0.4
   damage: 20

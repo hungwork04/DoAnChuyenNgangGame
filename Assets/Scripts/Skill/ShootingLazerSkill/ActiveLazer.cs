@@ -27,15 +27,19 @@ public class ActiveLazer : MonoBehaviour
     }
     void Update()
     {
-        if (impact.isUsingSkill)
+        if (impact.isUsingSkillCanMove)
         {
             ShootLaser();
         }
     }
-
+    private void OnDisable()
+    {
+        StopLazer();
+        //Debug.Log("ngungwban");
+    }
     public void ToggleLazer(float durationTime)
     {
-        if (impact.isUsingSkill)
+        if (impact.isUsingSkillCanMove)
         {
             StopLazer();
         }
@@ -50,7 +54,8 @@ public class ActiveLazer : MonoBehaviour
         //isLazering = true;
         m_lineRenderer.enabled = true;
         volume.enabled = true;
-        impact.isUsingSkill = true;
+        impact.isUsingSkillCanMove = true;
+        impact.SkillInUse.Add(1);
         lazerCoroutine = StartCoroutine(LazerDuration(durationTime));
         avatar.avatarList[avatar.index].GetComponent<Animator>().SetBool("isSkill2", true);
 
@@ -63,9 +68,11 @@ public class ActiveLazer : MonoBehaviour
         if (lazerCoroutine != null)
         {
             StopCoroutine(lazerCoroutine);
-            impact.isUsingSkill = false;
+            impact.isUsingSkillCanMove = false;
+            impact.SkillInUse.Remove(1);
             volume.enabled = false;
             lazerCoroutine = null;
+            currentTarget = null;
         }
         avatar.avatarList[avatar.index].GetComponent<Animator>().SetBool("isSkill2", false);
     }
@@ -73,7 +80,7 @@ public class ActiveLazer : MonoBehaviour
     IEnumerator LazerDuration(float durationTime)
     {
         float elapsedTime = 0f;
-        while (elapsedTime < durationTime && impact.isUsingSkill)
+        while (elapsedTime < durationTime && impact.isUsingSkillCanMove)
         {
             //if (currentTarget != null)
             //{
@@ -92,12 +99,27 @@ public class ActiveLazer : MonoBehaviour
 
         if (_hit)
         {
+
             Draw2DRay(laserFirePoint.position, _hit.point);
             //Debug.Log(_hit.collider);
+            if (_hit.collider.transform.parent.GetComponentInParent<PlayerHealth>())
+            {
+
+                currentTarget = _hit.collider.transform.parent.GetComponentInParent<PlayerHealth>();
+                currentTarget.GetComponent<PlayerHealth>().takeDame(0.5f);
+            }
+            else
+            {
+               currentTarget = null;
+                    return;
+            }
+
+            //currentTarget= _hit.collider.gameObject;
         }
         else
         {
             Draw2DRay(laserFirePoint.position, laserFirePoint.transform.right * defDistanceRay);
+            currentTarget=null;
         }
     }
 

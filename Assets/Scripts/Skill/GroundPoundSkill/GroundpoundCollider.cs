@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GroundpoundCollider : MeleeColliderInteract
 {
-    public float dashtime = 0.2f;
+    public float dashtime = 0.5f;
     public playerAvatar ava;
     public Rigidbody2D rb;
     public PlayerMovement playerMovement;
@@ -30,6 +30,7 @@ public class GroundpoundCollider : MeleeColliderInteract
         {
             playerCol.usedByEffector = true;
         }
+        this.GetComponentInParent<ImpactOnPlayer>().SkillInUse.Add(1);
         rb.linearVelocity = new Vector2(0f, -dashingPower * 1.5f);
         
         while (!playerMovement.isGrounded && playerMovement.isDashing)
@@ -53,14 +54,21 @@ public class GroundpoundCollider : MeleeColliderInteract
         }
         Vector2 editGroundPoint = new Vector2(groundPoint.x, groundPoint.y +0.3f);
         var eff = Instantiate(groundPoundEff, editGroundPoint, Quaternion.identity);
-        Debug.Log("Dừng dásh");
+        //Debug.Log("Dừng dásh");
         playerMovement.isDashing = false;
         rb.linearVelocity = Vector2.zero;
         rb.gravityScale = 1;
+        this.GetComponentInParent<ImpactOnPlayer>().SkillInUse.Remove(1);
         base.ActivateCollider(dashtime, 10); // Gọi base khi dash kết thúc
-        //Destroy(eff);
+        StartCoroutine(desEffect(eff, dashtime+0.05f));
     }
 
+    private IEnumerator desEffect(GameObject eff,float dashTime)
+    {
+        yield return new WaitForSeconds(dashTime);
+        Destroy(eff);
+    }
+        
     public override void ActivateCollider(float duration, int skillDamage)
     {
         if (playerMovement != null)

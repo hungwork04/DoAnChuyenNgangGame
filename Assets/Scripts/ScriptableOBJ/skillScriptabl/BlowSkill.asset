@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BlowSkill
   m_EditorClassIdentifier: 
   skillName: BlowSkill
-  cooldown: 0.7
+  cooldown: 5
   activeTime: 0.9
   damage: 20
