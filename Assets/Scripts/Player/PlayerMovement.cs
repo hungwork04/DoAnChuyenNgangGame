@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 movementInput;
     public PlayerAby playerAby;
     public SpriteRenderer PlayerColor;
-    private Color originalColor;
+    public Color originalColor;
     private void Awake()
     {
 
@@ -130,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
     // Hàm di chuyển nhân vật
     private void Move()
     {
-        if (!impactOnPlayer.isKnockback && isDashing==false&&impactOnPlayer.isUsingSkill==false)
+        if (!impactOnPlayer.isKnockback && isDashing==false&&impactOnPlayer.isUsingSkillCanMove==false)
         {
             rb.linearVelocity = new Vector2(movementInput.x * moveSpeed, rb.linearVelocity.y);
             if (movementInput.x > 0 && !facingRight)

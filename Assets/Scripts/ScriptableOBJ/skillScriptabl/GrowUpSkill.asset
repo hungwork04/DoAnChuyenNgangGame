@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GrowUpSkill
   m_EditorClassIdentifier: 
   skillName: GrowUpSkill
-  cooldown: 13
+  cooldown: 20
   damage: 0

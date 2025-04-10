@@ -15,7 +15,7 @@ public class TeleportDoor : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            var player = collision.transform.parent.parent;
+            var player = collision.transform?.parent?.parent;
             if (player != null)
             {
                 var playeraby = player.GetComponentInChildren<PlayerAby>();
@@ -28,7 +28,7 @@ public class TeleportDoor : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            var player = collision.transform.parent.parent;
+            var player = collision.transform?.parent?.parent;
             if (player != null)
             {
                 var playeraby = player.GetComponentInChildren<PlayerAby>();

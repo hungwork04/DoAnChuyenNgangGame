@@ -13,10 +13,19 @@ public class ActiveShapeShift : MonoBehaviour
     public PlayerMovement playerMovement;
     public CharacterSkillManager chaSkillmana;
     public GameObject startPlayer;
-    public PlayerAby playerAbility;
+    public bool isInShapeShifting=false;
+    public bool isFirstTimeUse=true;
+    //public PlayerAby playerAbility;
     private void Awake()
     {
         colActive = GetComponent<Collider2D>();
+    }
+    private void Update()
+    {
+        if (avatar)
+        {
+            this.transform.localScale = new Vector3((avatar.transform.localScale.x)/Math.Abs(avatar.transform.localScale.x), transform.localScale.y);
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -43,12 +52,52 @@ public class ActiveShapeShift : MonoBehaviour
             yield break; // Thoát nếu copyIndex không hợp lệ
         
         ApplyAvatarAndSkills(copyIndex, CopiedPlayer);
+        startPlayer.GetComponent<ImpactOnPlayer>().SkillInUse.Add(1);
         //Debug.Log("hể");
+        isInShapeShifting=true;
         resetPlayerBombHandle(this.transform.parent);
+
         yield return new WaitForSeconds(timeRemain);
 
         Debug.Log("hết rồi");
+
+        resolveProblemAtLast(avatar.avatarList[copyIndex]);
+
         ApplyAvatarAndSkills(thisIndex, startPlayer);
+        isInShapeShifting = false;
+        startPlayer.GetComponent<ImpactOnPlayer>().SkillInUse.Remove(1);
+    }
+    public void resolveProblemAtLast(GameObject charact)
+    {
+        if(charact==null) return;
+        if (charact.GetComponentInChildren<MeleeColliderInteract>())
+        {
+            charact.GetComponentInChildren<MeleeColliderInteract>().DeactivateCollider();
+            Debug.Log("resetatk");
+        }
+        else if (charact.GetComponentInChildren<MeleeAtkforBigGuy>())
+        {
+            charact.GetComponentInChildren<MeleeAtkforBigGuy>().DeactivateCollider();
+            Debug.Log("resetBigGuy1");
+        }
+        else if (charact.GetComponentInChildren<GroundpoundCollider>())
+        {
+            charact.GetComponentInChildren<GroundpoundCollider>().DeactivateCollider();
+            Debug.Log("resetbombGuy");
+        }
+
+        if (charact.GetComponentInChildren<ActiveGrowUpSkill>())
+        {
+            charact.GetComponentInChildren<ActiveGrowUpSkill>().beforeDisable();
+            Debug.Log("resetBigG");
+        }else if (charact.GetComponentInChildren<ActiveDash>())
+        {
+            charact.GetComponentInChildren<ActiveDash>().StopAllCoroutines();
+            Debug.Log("resetDash");
+        }else if (charact.GetComponentInChildren<ActiveSpeedUp>())
+        {
+            charact.GetComponentInChildren<ActiveSpeedUp>().endSkill();
+        }
     }
     private void ApplyAvatarAndSkills(int avatarIndex, GameObject player)
     {
@@ -62,7 +111,8 @@ public class ActiveShapeShift : MonoBehaviour
         try
         {
             chaSkillmana.cooldownTimers[1] = chaSkillmana.currentCharacter.skills[1].cooldown;
-            chaSkillmana.currCooldownTimers[1] = (player == startPlayer) ? 10 : 0;
+            chaSkillmana.currCooldownTimers[1] = (player == startPlayer) ? chaSkillmana.cooldownTimers[1] : 0;
+            Debug.Log(chaSkillmana.currCooldownTimers[1]);
         }
         catch (IndexOutOfRangeException)
         {

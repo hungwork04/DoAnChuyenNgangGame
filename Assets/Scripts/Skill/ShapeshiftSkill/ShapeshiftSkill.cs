@@ -17,7 +17,8 @@ public class ShapeshiftSkill : Skill
                 Debug.Log("K có đối tượng!!");
                 return;
             }
-            Debug.Log($"{collider.name} used!");
+            //Debug.Log($"{collider.name} used!");
+            collider.isFirstTimeUse = true;
             collider.StartCoroutine(collider.activeShapeShiftSkill(activeTime));
         }
 

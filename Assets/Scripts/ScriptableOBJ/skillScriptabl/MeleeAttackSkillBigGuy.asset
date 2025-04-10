@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MeleeAttackSkillBigGuy
   m_EditorClassIdentifier: 
   skillName: MeleeAttack
-  cooldown: 1.5
+  cooldown: 10
   activeTime: 0.6
   damage: 20

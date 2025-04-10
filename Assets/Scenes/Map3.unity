@@ -278,9 +278,9 @@ GameObject:
   m_Component:
   - component: {fileID: 25957673}
   - component: {fileID: 25957674}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2146,7 +2146,6 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
-  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2272,26 +2271,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2291a62875e413d4abead5d7417e7166, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  players: []
-  minSize: 5
-  maxSize: 7
-  zoomSpeed: 2.9
-  padding: 2
-  fixedY: 0
-  distanceThreshold: 10
-  xLimit: {x: -5.25, y: 1.59}
 --- !u!1 &534584752
 GameObject:
   m_ObjectHideFlags: 0
@@ -2644,9 +2623,9 @@ GameObject:
   m_Component:
   - component: {fileID: 667562578}
   - component: {fileID: 667562579}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall (4)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3262,9 +3241,9 @@ GameObject:
   m_Component:
   - component: {fileID: 750590819}
   - component: {fileID: 750590820}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall (5)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8033,9 +8012,9 @@ GameObject:
   m_Component:
   - component: {fileID: 855671359}
   - component: {fileID: 855671360}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9449,7 +9428,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxPlayers: 6
   currentPlayerCount: 0
-  gameStarted: 0
   startBtn: {fileID: 0}
   selectCharacterUI: {fileID: 0}
   Howtoplaybtn: {fileID: 0}
@@ -20445,9 +20423,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1879929465}
   - component: {fileID: 1879929466}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall (3)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21568,9 +21546,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2007165240}
   - component: {fileID: 2007165241}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

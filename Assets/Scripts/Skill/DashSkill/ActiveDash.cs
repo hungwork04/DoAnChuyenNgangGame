@@ -20,7 +20,7 @@ public class ActiveDash : MonoBehaviour
     {
         playerMovement.isDashing = true;
         float originalGravity = rb.gravityScale;
-
+        ava.GetComponentInChildren<ImpactOnPlayer>().SkillInUse.Add(0);
         // Tạm thời vô hiệu hóa trọng lực và ma sát
         rb.gravityScale = 0;
         rb.linearVelocity=Vector2.zero;
@@ -35,6 +35,7 @@ public class ActiveDash : MonoBehaviour
         playerMovement.isDashing = false;
         rb.linearVelocity = Vector2.zero;
         rb.gravityScale = originalGravity;
+        ava.GetComponentInChildren<ImpactOnPlayer>().SkillInUse.Remove(0);
 
         //Debug.Log("Dash hoàn tất");
     }

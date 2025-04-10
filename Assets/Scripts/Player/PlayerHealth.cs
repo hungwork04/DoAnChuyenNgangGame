@@ -31,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
         playerCollider = plerAva.avatarList[plerAva.index].GetComponent<Collider2D>();
     }
     public bool wasInviciable= false;
-    public void takeDame(int Damage)
+    public void takeDame(float Damage)
     {
         if (currentHealth<=0) return;
         if (isInvincible) return;

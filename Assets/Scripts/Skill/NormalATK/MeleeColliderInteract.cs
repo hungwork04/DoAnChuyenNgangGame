@@ -9,7 +9,7 @@ public class MeleeColliderInteract : MonoBehaviour
     //public Transform colPos;
     public float radiusCol;
     public LayerMask layer;
-    public int damage;
+    public float damage;
 
     protected void Awake()
     {
@@ -30,20 +30,21 @@ public class MeleeColliderInteract : MonoBehaviour
         {
             damage = skillDamage;
             MeleeCollider.enabled = true; // Bật Collider
-            MeleeCollider.GetComponentInParent<ImpactOnPlayer>().isUsingSkill = true;
+            MeleeCollider.GetComponentInParent<ImpactOnPlayer>().isUsingSkillCanMove = true;
             // Tắt Collider sau thời gian kích hoạt
             Invoke(nameof(DeactivateCollider), duration);
 
         }
     }
-
-    protected virtual void DeactivateCollider()
+    public virtual void DeactivateCollider()
     {
         if (MeleeCollider != null)
         {
             MeleeCollider.enabled = false; // Tắt Collider
-            MeleeCollider.GetComponentInParent<ImpactOnPlayer>().isUsingSkill = false;
+            if(MeleeCollider.GetComponentInParent<ImpactOnPlayer>())//chống lỗi khi copy nhân vật
+                MeleeCollider.GetComponentInParent<ImpactOnPlayer>().isUsingSkillCanMove = false;
             processedRigidbodies.Clear();
+            Debug.Log("end");
         }
     }
     public HashSet<Transform> processedRigidbodies = new HashSet<Transform>();

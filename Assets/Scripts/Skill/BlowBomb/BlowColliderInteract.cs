@@ -20,6 +20,7 @@ public class BlowColliderInteract : MonoBehaviour
         if (BlowCollider != null)
         {
             BlowCollider.enabled = false; // Tắt Collider khi bắt đầu
+            
         }
     }
 
@@ -28,7 +29,7 @@ public class BlowColliderInteract : MonoBehaviour
         if (BlowCollider != null)
         {
             StartCoroutine(delaysd( duration,skillDamage, 0.2f));
-            
+            BlowCollider.GetComponentInParent<ImpactOnPlayer>().SkillInUse.Add(0);
         }
     }
     private void DeactivateCollider()
@@ -36,9 +37,9 @@ public class BlowColliderInteract : MonoBehaviour
         if (BlowCollider != null)
         {
             processedRigidbodies.Clear();
-            BlowCollider.GetComponentInParent<ImpactOnPlayer>().isUsingSkill = false;
+            BlowCollider.GetComponentInParent<ImpactOnPlayer>().isUsingSkillCanMove = false;
             BlowCollider.enabled = false; // Tắt Collider
-
+            BlowCollider.GetComponentInParent<ImpactOnPlayer>().SkillInUse.Remove(0);
         }
     }
     HashSet<Transform> processedRigidbodies = new HashSet<Transform>();
@@ -69,7 +70,7 @@ public class BlowColliderInteract : MonoBehaviour
         yield return new WaitForSeconds(tim);
         damage = skillDamage;
         BlowCollider.enabled = true; // Bật Collider
-        BlowCollider.GetComponentInParent<ImpactOnPlayer>().isUsingSkill = true;
+        BlowCollider.GetComponentInParent<ImpactOnPlayer>().isUsingSkillCanMove = true;
 
         // Tắt Collider sau thời gian kích hoạt
         Invoke(nameof(DeactivateCollider), duration);

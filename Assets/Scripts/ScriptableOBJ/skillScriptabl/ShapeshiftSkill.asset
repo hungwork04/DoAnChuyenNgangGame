@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ShapeshiftSkill
   m_EditorClassIdentifier: 
   skillName: ShapeShitSkill
-  cooldown: 17
+  cooldown: 25
   activeTime: 15

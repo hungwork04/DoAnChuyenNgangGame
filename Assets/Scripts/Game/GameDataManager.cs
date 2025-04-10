@@ -4,7 +4,7 @@ using UnityEngine;
 public class GameDataManager : MonoBehaviour
 {
     public static GameDataManager instance;
-
+    public bool gameStarted = false;
     public List<PlayerDeviceInfo> playerDevicesInfo = new List<PlayerDeviceInfo>();//data
 
     private void OnEnable()

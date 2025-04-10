@@ -11,6 +11,7 @@ public class ActiveGrowUpSkill : MonoBehaviour
     public bool isProcessing =false;
     public Transform parentObj;
     public Collider2D interactCol2d;
+    public GameObject AuraObj;
     private void Start()
     {
         interactCol2d=GetComponent<Collider2D>();
@@ -19,12 +20,16 @@ public class ActiveGrowUpSkill : MonoBehaviour
         }
         originalScale = parentObj.localScale;
         targetScale = originalScale ;
+        AuraObj.SetActive(false);
     }
     public IEnumerator growUp()
     {
         //Debug.Log("Chạy vào đây1");
+        this.GetComponentInParent<ImpactOnPlayer>().isUseSkill = true;
         isProcessing = true;
         interactCol2d.enabled=true;
+        this.GetComponentInParent<ImpactOnPlayer>().SkillInUse.Add(1);
+        AuraObj.SetActive(true);
         for (int i = 0; i < 3; i++)
         {
             targetScale  *= 1.25f;
@@ -60,8 +65,31 @@ public class ActiveGrowUpSkill : MonoBehaviour
         targetScale = originalScale;
         isProcessing = false;
         interactCol2d.enabled = false;
+        this.GetComponentInParent<ImpactOnPlayer>().SkillInUse.Remove(1);
+        AuraObj.SetActive(false);
 
     }
+    public  void beforeDisable()
+    {
+        StopAllCoroutines();
+        while (originalScale.x < targetScale.x)
+        {
+            parentObj.localScale = Vector3.Lerp(targetScale, originalScale, growSpeed);
+            if (Mathf.Abs(originalScale.x - parentObj.localScale.x) < 0.01f)
+            {
+                parentObj.localScale = originalScale;
+                break;
+            }
+        }
+        this.GetComponentInParent<ImpactOnPlayer>().SkillInUse.Add(1);
+        //Debug.Log("Chạy vào đây4");
+        targetScale = originalScale;
+        isProcessing = false;
+        interactCol2d.enabled = false;
+        AuraObj.SetActive(false);
+
+    }
+
     //public IEnumerator ignoreBombVsInteractColinSecond(Transform coltrans)
     //{
     //    var aby = coltrans.gameObject.GetComponentInChildren<PlayerAby>();
@@ -108,13 +136,15 @@ public class ActiveGrowUpSkill : MonoBehaviour
 
         float startCountDown = chaSkill.cooldownTimers[0];
         chaSkill.cooldownTimers[0] = 0.5f;
+        chaSkill.currCooldownTimers[0] = 0;
         Debug.Log("Giamr hooi chiue");
-        yield return new WaitUntil(() => !isProcessing); // Cách viết tốt hơn
+        yield return new WaitUntil(() => !isProcessing); 
 
         // Kiểm tra lần nữa tránh lỗi nếu chaSkill bị xóa trong lúc chờ
         if (chaSkill != null && chaSkill.cooldownTimers != null && chaSkill.cooldownTimers.Length > 0)
         {
             chaSkill.cooldownTimers[0] = startCountDown;
         }
+        this.transform.GetComponentInParent<ImpactOnPlayer>().isUseSkill = false;
     }
 }

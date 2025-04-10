@@ -19,7 +19,7 @@ public class MeleeColliderTele : MeleeAtkforBigGuy {
                 //colPos.position= this.transform.position;
                 Collider2D[] cols = Physics2D.OverlapCircleAll(MeleeCollider.transform.position, radiusCol, layer);
                 processingKnockBack(cols);
-            MeleeCollider.GetComponentInParent<ImpactOnPlayer>().isUsingSkill = true;
+            MeleeCollider.GetComponentInParent<ImpactOnPlayer>().isUsingSkillCanMove = true;
             // Tắt Collider sau thời gian kích hoạt
             Invoke(nameof(DeactivateCollider), duration);
 

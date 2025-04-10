@@ -15,7 +15,6 @@ public class PlayerJoinManager : MonoBehaviour
     public HashSet<InputDevice> usedDevices = new HashSet<InputDevice>();
     [SerializeField] private int maxPlayers = 6;
     public int currentPlayerCount = 0;
-    public bool gameStarted = false;
     public List<PlayerDeviceInfo> playerDevicesInfo = new List<PlayerDeviceInfo>();
     public Button startBtn;
     public Button selectCharacterUI;
@@ -82,7 +81,7 @@ public class PlayerJoinManager : MonoBehaviour
     {
         if (currentPlayerCount >= 1)
         {
-            gameStarted = true;
+            GameDataManager.instance.gameStarted = true;
             //Debug.Log("Game bắt đầu! Không thể thêm người chơi mới.");
 
             GameDataManager.instance.SetPlayerDevicesInfo(playerDevicesInfo);
@@ -96,7 +95,7 @@ public class PlayerJoinManager : MonoBehaviour
             }
             //StartCoroutine(SetJoinPlayerManually());
             danhsach.Clear();
-            SceneManager.LoadScene(3); 
+            SceneManager.LoadScene(1); 
         }
         else
         {
@@ -204,7 +203,7 @@ public class PlayerJoinManager : MonoBehaviour
             case InputDeviceChange.Removed:
                 Debug.Log($"Device removed: {device}");
 
-                if (players.ContainsKey(device) &&gameStarted==false)
+                if (players.ContainsKey(device) && !GameDataManager.instance.gameStarted )
                 {
                     PlayerInput playerInput = players[device].GetComponent<PlayerInput>();
                     if (playerInput != null)

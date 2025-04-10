@@ -14,11 +14,14 @@ public class ImpactOnPlayer : MonoBehaviour
     public bool isSliding = false;
     public bool isKnockback=false;
     public bool isStunned = false;
-    public bool isUsingSkill = false;
+    public bool isUsingSkillCanMove = false;
+    public bool isUseSkill = false;
     public bool isClimbing = false;
     public bool isSlowed = false;
     public bool isTouchingWall=false;
     public float wallContactTime = 0f;
+
+    public List<int> SkillInUse = new List<int>();
 
     public Coroutine currSlowedCorou;
     public PlayerMovement playerMovement;
@@ -94,12 +97,15 @@ public class ImpactOnPlayer : MonoBehaviour
 
         var plyerMovement = impact.playerMovement;
         if (plyerMovement == null) yield break; // Thoát nếu không có PlayerMovement
+
+        plyerMovement.PlayerColor.color= Color.green;
         plyerMovement.moveSpeed -=0.4f;
         isSlowed = true;
         yield return new WaitForSeconds(10f);
         Debug.Log("hết time");
         plyerMovement.moveSpeed = plyerMovement.startmoveSpeed;
         isSlowed = false;
+        plyerMovement.PlayerColor.color = plyerMovement.originalColor;
 
     }
     public void startSlowed(Transform coltrans)
