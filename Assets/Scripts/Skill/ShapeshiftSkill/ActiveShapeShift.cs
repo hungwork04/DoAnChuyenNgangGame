@@ -103,7 +103,6 @@ public class ActiveShapeShift : MonoBehaviour
     {
         avatar.setAva(avatarIndex);
         playerMovement.PlayerColor = avatar.avatarList[avatarIndex].GetComponent<SpriteRenderer>();
-
         chaSkillmana.currentCharacter = player.GetComponent<ImpactOnPlayer>().whichPlayer;
         chaSkillmana.cooldownTimers[0] = chaSkillmana.currentCharacter.skills[0].cooldown;
         chaSkillmana.currCooldownTimers[0] = 0;
