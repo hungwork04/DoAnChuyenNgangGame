@@ -57,7 +57,7 @@ public class PlayerJoinManager : MonoBehaviour
         selectCharacterUI.onClick.AddListener(() => { UISelectCharacter.SetActive(true); });
         Howtoplaybtn.onClick.AddListener(() =>
         {
-            Debug.Log("Button Clicked");
+            //Debug.Log("Button Clicked");
             if (UIHowToplay != null)
             {
                 UIHowToplay.SetActive(true);

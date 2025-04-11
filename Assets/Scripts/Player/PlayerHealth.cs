@@ -70,7 +70,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 playerAvatar otherAva = players[i].GetComponentInChildren<playerAvatar>();
                 Collider2D col2d = otherAva.avatarList[otherAva.index].GetComponent<Collider2D>();
-                Physics2D.IgnoreCollision(playerCollider, col2d, true);
+                //Physics2D.IgnoreCollision(playerCollider, col2d, true);
             }
         }
         yield return new WaitForSeconds(5);
@@ -81,7 +81,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 playerAvatar otherAva = players[i].GetComponentInChildren<playerAvatar>();
                 Collider2D col2d = otherAva.avatarList[otherAva.index].GetComponent<Collider2D>();
-                Physics2D.IgnoreCollision(playerCollider, col2d, false);
+                //Physics2D.IgnoreCollision(playerCollider, col2d, false);
             }
         }
         isInvincible = false;

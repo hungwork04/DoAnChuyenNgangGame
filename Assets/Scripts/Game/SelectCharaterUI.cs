@@ -13,7 +13,7 @@ public class SelectCharaterUI : MonoBehaviour
 {
     public List<Sprite> sprites = new List<Sprite>();
     [Header("Choosing")]
-    public Image PlayerCharacter;
+    public Image PlayerCharacter;//đổi thành position
     public Button changeUpBtn;
     public Button changeDownBtn;
     public TextMeshProUGUI PlayerIndex;
