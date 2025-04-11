@@ -25,6 +25,14 @@ public class ImpactOnPlayer : MonoBehaviour
 
     public Coroutine currSlowedCorou;
     public PlayerMovement playerMovement;
+    public Vector2 oldOffset;
+    public Vector2 oldSize;
+    private void OnEnable()
+    {
+        this.GetComponent<BoxCollider2D>().offset = oldOffset;
+        this.GetComponent<BoxCollider2D>().size = oldSize;
+        
+    }
     private void Awake()
     {
         if (playerMovement == null) playerMovement = transform.parent.parent.GetComponentInChildren<PlayerMovement>();
