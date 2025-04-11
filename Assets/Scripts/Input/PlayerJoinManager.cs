@@ -95,7 +95,7 @@ public class PlayerJoinManager : MonoBehaviour
             }
             //StartCoroutine(SetJoinPlayerManually());
             danhsach.Clear();
-            SceneManager.LoadScene(2); 
+            SceneManager.LoadScene(1); 
         }
         else
         {

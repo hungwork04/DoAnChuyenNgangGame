@@ -754,6 +754,8 @@ MonoBehaviour:
   wallContactTime: 0
   SkillInUse: 
   playerMovement: {fileID: 5110314966547385146}
+  oldOffset: {x: -0.04528441, y: -0.07788933}
+  oldSize: {x: 0.2964371, y: 0.5642214}
   climbSpeed: 5
   startgravityScale: 0
   canClimbing: 0
@@ -1348,6 +1350,8 @@ MonoBehaviour:
   wallContactTime: 0
   SkillInUse: 
   playerMovement: {fileID: 5110314966547385146}
+  oldOffset: {x: 0.04800017, y: -0.04189011}
+  oldSize: {x: 0.278974, y: 0.4917859}
   climbSpeed: 5
   startgravityScale: 0
   canClimbing: 0
@@ -2326,6 +2330,8 @@ MonoBehaviour:
   wallContactTime: 0
   SkillInUse: 
   playerMovement: {fileID: 5110314966547385146}
+  oldOffset: {x: 0.02, y: -0.03055559}
+  oldSize: {x: 0.550146, y: 0.4013931}
   climbSpeed: 5
   startgravityScale: 0
   canClimbing: 0
@@ -2582,6 +2588,8 @@ MonoBehaviour:
   wallContactTime: 0
   SkillInUse: 
   playerMovement: {fileID: 5110314966547385146}
+  oldOffset: {x: 0, y: -0.03047627}
+  oldSize: {x: 0.2701738, y: 0.6006479}
   climbSpeed: 5
   startgravityScale: 0
   canClimbing: 0
@@ -3193,6 +3201,8 @@ MonoBehaviour:
   wallContactTime: 0
   SkillInUse: 
   playerMovement: {fileID: 5110314966547385146}
+  oldOffset: {x: -0.0258604, y: -0.03836793}
+  oldSize: {x: 0.2596812, y: 0.5725952}
   climbSpeed: 5
   startgravityScale: 0
   canClimbing: 0
@@ -3389,6 +3399,8 @@ MonoBehaviour:
   wallContactTime: 0
   SkillInUse: 
   playerMovement: {fileID: 5110314966547385146}
+  oldOffset: {x: -0.0564614, y: -0.08139011}
+  oldSize: {x: 0.2958143, y: 0.5772198}
   climbSpeed: 5
   startgravityScale: 0
   canClimbing: 0
@@ -3426,7 +3438,7 @@ BoxCollider2D:
   m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.051823378, y: -0.07}
+  m_Offset: {x: -0.0564614, y: -0.08139011}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3436,7 +3448,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.34, y: 0.61}
+  m_Size: {x: 0.29581428, y: 0.5772198}
   m_EdgeRadius: 0
 --- !u!251 &1794400725956468940
 PlatformEffector2D:
