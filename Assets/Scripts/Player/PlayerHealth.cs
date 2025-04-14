@@ -29,6 +29,7 @@ public class PlayerHealth : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
         plerAva = this.GetComponentInChildren<playerAvatar>();
         playerCollider = plerAva.avatarList[plerAva.index].GetComponent<Collider2D>();
+        IsDead = false;
     }
     public bool wasInviciable= false;
     public void takeDame(float Damage)
@@ -53,6 +54,7 @@ public class PlayerHealth : MonoBehaviour
             healthBar.gameObject.SetActive(false);
             powerBar.gameObject.SetActive(false);
             plerAva.avatarList[plerAva.index].gameObject.GetComponent<Collider2D>().usedByEffector = true;
+            IsDead = true;
         }
     }
     IEnumerator temporaryIgnoreCollision()
