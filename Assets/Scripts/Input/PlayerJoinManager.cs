@@ -10,7 +10,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerJoinManager : MonoBehaviour
-{   public static PlayerJoinManager instance;
+{
+    public static PlayerJoinManager instance;
     public Dictionary<InputDevice, GameObject> players = new Dictionary<InputDevice, GameObject>();
     public HashSet<InputDevice> usedDevices = new HashSet<InputDevice>();
     [SerializeField] private int maxPlayers = 6;
@@ -19,11 +20,12 @@ public class PlayerJoinManager : MonoBehaviour
     public Button startBtn;
     public Button selectCharacterUI;
     public Button Howtoplaybtn;
+    public GameObject UIMapSelection;
 
     public GameObject UISelectCharacter;
     public GameObject UIHowToplay;
 
-    public List<GameObject> danhsach=new List<GameObject>();
+    public List<GameObject> danhsach = new List<GameObject>();
     public SelectCharaterUI selectCharaterUI;
     private PlayerInputManager playerInputManager;
 
@@ -32,7 +34,7 @@ public class PlayerJoinManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-           // DontDestroyOnLoad(gameObject); // Giữ lại khi load Scene mới
+            // DontDestroyOnLoad(gameObject); // Giữ lại khi load Scene mới
         }
         //else
         //{
@@ -81,7 +83,6 @@ public class PlayerJoinManager : MonoBehaviour
     {
         if (currentPlayerCount >= 1)
         {
-            GameDataManager.instance.gameStarted = true;
             //Debug.Log("Game bắt đầu! Không thể thêm người chơi mới.");
 
             GameDataManager.instance.SetPlayerDevicesInfo(playerDevicesInfo);
@@ -95,7 +96,7 @@ public class PlayerJoinManager : MonoBehaviour
             }
             //StartCoroutine(SetJoinPlayerManually());
             danhsach.Clear();
-            SceneManager.LoadScene(1); 
+            UIMapSelection.SetActive(true);
         }
         else
         {
@@ -105,7 +106,7 @@ public class PlayerJoinManager : MonoBehaviour
             }
             Debug.LogWarning("Không thể bắt đầu game mà không có đủ người chơi!");
             warnText.text = "We need 2 or more players to start the game. Please connect additional devices.";
-            oldco=StartCoroutine(resetwarntext());
+            oldco = StartCoroutine(resetwarntext());
             return;
         }
     }
@@ -113,9 +114,9 @@ public class PlayerJoinManager : MonoBehaviour
     private IEnumerator resetwarntext()
     {
         yield return new WaitForSeconds(3.5f);
-        warnText.text=string.Empty;
+        warnText.text = string.Empty;
         oldco = null;
-       
+
     }
 
     private void OnEnable()
@@ -151,7 +152,7 @@ public class PlayerJoinManager : MonoBehaviour
             {
                 index = playerDevicesInfo[playerDevicesInfo.Count - 1].playerIndex + 1;
             }
-            playerDevicesInfo.Add(new PlayerDeviceInfo(device, 0,index));
+            playerDevicesInfo.Add(new PlayerDeviceInfo(device, 0, index));
             currentPlayerCount++;
         }
     }
@@ -203,7 +204,7 @@ public class PlayerJoinManager : MonoBehaviour
             case InputDeviceChange.Removed:
                 Debug.Log($"Device removed: {device}");
 
-                if (players.ContainsKey(device) && !GameDataManager.instance.gameStarted )
+                if (players.ContainsKey(device) && !GameDataManager.instance.gameStarted)
                 {
                     PlayerInput playerInput = players[device].GetComponent<PlayerInput>();
                     if (playerInput != null)
@@ -226,7 +227,7 @@ public class PlayerDeviceInfo
     public InputDevice device;
     public int characterType { get; set; }
     public int playerIndex;
-    public Color playercolor=Color.white;
+    public Color playercolor = Color.white;
     public PlayerDeviceInfo(InputDevice device, int characterType, int playerIndex)
     {
         this.device = device;
