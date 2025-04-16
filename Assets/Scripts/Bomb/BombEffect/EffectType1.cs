@@ -25,7 +25,7 @@ public class EffectType1 : BombEffected
         //Debug.Log("Entered: " + collision.transform?.parent?.parent.gameObject);
         if ((targetLayers.value & (1 << collision.gameObject.layer)) != 0)
         {
-            Debug.Log("Triggered effectImpact");
+            //Debug.Log("Triggered effectImpact");
             effectImpact(collision);
         }
     }
