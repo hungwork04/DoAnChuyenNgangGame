@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ReturnPosSkill
   m_EditorClassIdentifier: 
   skillName: ReturnPosSkill
-  cooldown: 3
-  activeTime: 5
+  cooldown: 13
+  activeTime: 15

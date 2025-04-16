@@ -6,6 +6,7 @@ using UnityEngine;
 public class GrowUpSkill : Skill
 {
     public int damage = 0;        // Sát thương
+    public float GrowUpRemainTime=5f;
     public override void Activate(GameObject character)
     {
         // Kích hoạt Collider tạm thời
@@ -13,7 +14,7 @@ public class GrowUpSkill : Skill
         //Debug.Log("here: " + character);
 
         if (act == null) return;
-        act.StartCoroutine(act.growUp());
+        act.StartCoroutine(act.growUp(GrowUpRemainTime));
 
         //Debug.Log($"{character.name} used Kick!");
     }

@@ -5,11 +5,13 @@ public class PlayerInputHandler : MonoBehaviour
     private PlayerMovement playerMovement;
     private PlayerAby playerAby;
     private CharacterSkillManager characterSkillManager;
+    private PlayerInventory playerInventory;
     private void Awake()
     {
         characterSkillManager = this.transform.parent.GetComponentInChildren<CharacterSkillManager>();
         playerMovement = GetComponent<PlayerMovement>();
         playerAby = this.transform.parent.GetComponentInChildren<PlayerAby>();
+        playerInventory = this.transform.parent.GetComponentInChildren<PlayerInventory>();
     }
 
     // Được gọi khi người chơi di chuyển
@@ -38,15 +40,7 @@ public class PlayerInputHandler : MonoBehaviour
         if (playerMovement.impactOnPlayer.isKnockback || playerMovement.impactOnPlayer.isStunned || playerMovement.isDashing) return;
         if (playerMovement != null && context.performed)
         {
-            //if (context.performed)
-            //{
-                playerMovement.climbing();
-            //}
-            //else if (context.canceled && playerMovement.impactOnPlayer.canClimbing)
-            //{
-            //    playerMovement.impactOnPlayer.isClimbing = false;
-            //    playerMovement.rb.gravityScale=playerMovement.impactOnPlayer.startgravityScale;
-            //}
+            playerMovement.climbing();
             if (playerMovement.impactOnPlayer.canClimbing) return;
             playerMovement.Jump();
         }
@@ -64,7 +58,7 @@ public class PlayerInputHandler : MonoBehaviour
         if (playerMovement.impactOnPlayer.isKnockback || playerMovement.impactOnPlayer.isStunned) return;
         if (playerAby != null && context.performed)
         {
-            if (playerAby.isCanOpenDoor && !playerAby.isCanTakeBomb)
+            if (playerAby.isCanOpenDoor && !playerAby.isCanTakeObj)
             {
                 playerAby.TeleByDoor();
                 return;
@@ -86,6 +80,47 @@ public class PlayerInputHandler : MonoBehaviour
         if (characterSkillManager != null && context.performed)
         {
             characterSkillManager.ActivateSkill(1);
+        }
+    }
+    public void OnUsingItem1(InputAction.CallbackContext context)
+    {
+        //if (playerMovement.impactOnPlayer.isKnockback || playerMovement.impactOnPlayer.isStunned) return;
+        if (context.performed)
+        {
+            if (playerInventory && playerInventory.items[0])
+            {
+                playerInventory.items[0].UsingItem(transform.parent);
+                playerInventory.items[0] = null;
+                playerInventory.playertag.GetComponent<UpdatePLayerTag>().setDefaulttag(0);
+            }
+        }
+    }    
+    public void OnUsingItem2(InputAction.CallbackContext context)
+    {
+        //if (playerMovement.impactOnPlayer.isKnockback || playerMovement.impactOnPlayer.isStunned) return;
+        if (context.performed)
+        {
+            if (playerInventory && playerInventory.items[1])
+            {
+                playerInventory.items[1].UsingItem(transform.parent);
+                playerInventory.items[1]= null;
+                playerInventory.playertag.GetComponent<UpdatePLayerTag>().setDefaulttag(1);
+
+            }
+        }
+    }    
+    public void OnUsingItem3(InputAction.CallbackContext context)
+    {
+        //if (playerMovement.impactOnPlayer.isKnockback || playerMovement.impactOnPlayer.isStunned) return;
+        if (context.performed)
+        {
+            if (playerInventory && playerInventory.items[2])
+            {
+                playerInventory.items[2].UsingItem(transform.parent);
+                playerInventory.items[2] = null;
+                playerInventory.playertag.GetComponent<UpdatePLayerTag>().setDefaulttag(2);
+
+            }
         }
     }
 }

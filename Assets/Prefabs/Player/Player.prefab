@@ -1078,6 +1078,7 @@ Transform:
   - {fileID: 3977715518784405623}
   - {fileID: 4031226183643806090}
   - {fileID: 6705184661367412787}
+  - {fileID: 4048880722053986715}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4292649358328179294
@@ -1181,7 +1182,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9171338149722616924
 Transform:
   m_ObjectHideFlags: 0
@@ -1572,6 +1573,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 5110314966547385146}
+--- !u!1 &3503913540212069861
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4048880722053986715}
+  - component: {fileID: 9176498025786973775}
+  m_Layer: 0
+  m_Name: PlayerInventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4048880722053986715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3503913540212069861}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2620139263524717444}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9176498025786973775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3503913540212069861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 079a6971d3ee5114a9a8c4805b3138c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &3947209599119577781
 GameObject:
   m_ObjectHideFlags: 0
@@ -2973,9 +3022,9 @@ MonoBehaviour:
     m_ActionName: 'PlayerMovement/Attack2[/Keyboard/r]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3059192826493349461, guid: f3578911729477042829b3f21b3c1b3b, type: 3}
-        m_TargetAssemblyTypeName: SpiritMovement, Assembly-CSharp
-        m_MethodName: OnMove
+      - m_Target: {fileID: 6005861811174471871}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnUsingItem1
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2985,28 +3034,40 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 1f204586-8f4a-4314-96d3-75e2a6ec7e0c
-    m_ActionName: 'SpiritMovement/Movement[/Keyboard/a,/Keyboard/d]'
+    m_ActionId: d4348d9b-37b9-41bd-8d69-665fccf95c39
+    m_ActionName: 'PlayerMovement/UsingItem1[/Keyboard/1]'
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 487a5504-d01a-46e1-8d01-4e5d6009bbe1
-    m_ActionName: 'SpiritMovement/Jump[/Keyboard/w]'
+      m_Calls:
+      - m_Target: {fileID: 6005861811174471871}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnUsingItem2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4bc0fbbe-e2b7-4413-9adb-3b56c9332adf
+    m_ActionName: 'PlayerMovement/UsingItem2[/Keyboard/2]'
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: de190e6b-80ad-4613-b658-b466d27dee74
-    m_ActionName: 'SpiritMovement/Throw[/Keyboard/space]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8f04e5e9-baf4-47d7-813a-512adb474001
-    m_ActionName: 'SpiritMovement/Pick[/Keyboard/e]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: e5a863f3-2f2b-491a-9882-70df1a0b33bb
-    m_ActionName: 'SpiritMovement/NormalAttack[/Keyboard/q]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a65dc13d-0192-4b5a-b763-0ffc83e8ed00
-    m_ActionName: 'SpiritMovement/Attack2[/Keyboard/r]'
+      m_Calls:
+      - m_Target: {fileID: 6005861811174471871}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnUsingItem3
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 08309a2c-3af0-4cd9-b3de-7ea5f70b61a1
+    m_ActionName: 'PlayerMovement/UsingItem3[/Keyboard/3]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerMovement
@@ -3276,7 +3337,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2284578970483434839
 Transform:
   m_ObjectHideFlags: 0
@@ -3759,12 +3820,13 @@ MonoBehaviour:
   maxThrowForce: 15
   scanRadius: 0.65
   isholdBomb: 0
-  isCanTakeBomb: 0
+  isCanTakeObj: 0
   isCanOpenDoor: 0
   isPressButton: 0
   holdBombPos: {fileID: 584460199318355555}
   Ava: {fileID: 4667006844098109375}
   TeleDoor: {fileID: 0}
+  inventory: {fileID: 0}
   playerPowerBar: {fileID: 750519044481995266}
 --- !u!114 &1566073729035761830
 MonoBehaviour:
@@ -4119,7 +4181,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fea0067a8c68a2a459b4734a816d4cae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GrowUpRemainTime: 10
   originalScale: {x: 0, y: 0, z: 0}
   targetScale: {x: 1.6, y: 1.6, z: 1.6}
   growSpeed: 1

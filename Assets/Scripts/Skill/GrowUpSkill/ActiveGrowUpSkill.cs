@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ActiveGrowUpSkill : MonoBehaviour
 {
-    public float GrowUpRemainTime = 5f;
+    //public float GrowUpRemainTime = 5f;
     public Vector3 originalScale;
     public Vector3 targetScale;
     public float growSpeed = 1f;
@@ -22,7 +22,7 @@ public class ActiveGrowUpSkill : MonoBehaviour
         targetScale = originalScale ;
         AuraObj.SetActive(false);
     }
-    public IEnumerator growUp()
+    public IEnumerator growUp(float GrowUpRemainTime)
     {
         //Debug.Log("Chạy vào đây1");
         this.GetComponentInParent<ImpactOnPlayer>().isUseSkill = true;

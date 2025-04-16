@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GroundPoundSkill
   m_EditorClassIdentifier: 
   skillName: GroundPoundSkill
-  cooldown: 1
+  cooldown: 15
   activeTime: 0.4
   damage: 20

@@ -22,6 +22,7 @@ public class PlayerTagUI : MonoBehaviour
                 {
                     tag.thisPlayer = PlayerJoinManager.instance.danhsach[i];
                 }
+                PlayerJoinManager.instance.danhsach[i].GetComponentInChildren<PlayerInventory>().playertag = newTag;
 
                 // Set parent và reset transform đúng cách
                 newTag.transform.SetParent(parentUI.transform, false); // FALSE rất quan trọng để giữ đúng scale UI

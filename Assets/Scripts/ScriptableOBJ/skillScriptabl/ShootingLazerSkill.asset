@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ShootingLazerSkill
   m_EditorClassIdentifier: 
   skillName: ShootingLazerSkill
-  cooldown: 6
+  cooldown: 30
   activeTime: 5

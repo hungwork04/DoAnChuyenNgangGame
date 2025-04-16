@@ -1,9 +1,9 @@
-﻿using NUnit.Framework;
+﻿using System;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class UpdatePLayerTag : MonoBehaviour
 {
@@ -47,7 +47,40 @@ public class UpdatePLayerTag : MonoBehaviour
                 skillQ.text = ((int)skillMNG.currCooldownTimers[0]).ToString();
                 skillR.text = ((int)skillMNG.currCooldownTimers[1]).ToString();
             }
-           
+            
+        }
+    }
+
+    public List<Sprite> Itemface;
+    public List<GameObject> Itemstag;
+    public Sprite EmptyItem;
+    public void setItemtagUi( int index)
+    {
+        var inventory = thisPlayer.GetComponentInChildren<PlayerInventory>();
+        if (inventory != null)
+        {
+            //for (int i = 0; i < inventory.items.Count; i++)//duyệt tất cả, set lại tất cả mỗi khi gọi
+            //{
+                var item = inventory.items[index];
+                if (item != null)
+                {
+                    var thisType = (int)item.type - 1;
+                    Itemstag[index].GetComponent<Image>().sprite = Itemface[thisType];
+                }
+                else
+                {
+                    Debug.Log(index);
+                }
+           // }
+        }
+    }
+    public void setDefaulttag(int index)
+    {
+        var inventory = thisPlayer.GetComponentInChildren<PlayerInventory>();
+        if (inventory != null)
+        {
+            var item = inventory.items[index];
+               Itemstag[index].GetComponent<Image>().sprite =EmptyItem;
         }
     }
 }

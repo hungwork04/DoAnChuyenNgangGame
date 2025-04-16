@@ -46,7 +46,7 @@ public class EffForBullet : BombEffected
                         var impact = coltrans.gameObject.GetComponentInChildren<ImpactOnPlayer>();
                         if (impact != null)
                         {
-                            impact.startSlowed(coltrans);
+                            impact.startSlowed();
                         }
                         Debug.Log("trừ máu " + health.gameObject);
                     }

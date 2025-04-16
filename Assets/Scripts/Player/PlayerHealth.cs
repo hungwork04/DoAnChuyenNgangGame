@@ -44,7 +44,35 @@ public class PlayerHealth : MonoBehaviour
             playerInviEff.ActivateInvincibility();
         }
     }
-    
+    public void doBuffHeal(float healValue)
+    {
+        StartCoroutine(BuffOverTime(healValue));
+    }
+    public IEnumerator BuffOverTime(float healValue)
+    {
+        float allHeal = healValue;
+
+        while (allHeal > 0)
+        {
+            if (currentHealth <= 0) yield break;
+
+            float healAmount = Mathf.Min(2f, allHeal);
+            currentHealth += healAmount;
+
+            if (currentHealth >= 100)
+            {
+                currentHealth = 100;
+                allHeal = 0; 
+            }
+            else
+            {
+                allHeal -= healAmount;
+            }
+
+            healthBar.SetHealth(currentHealth);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
     private void Update()
     {
         if (currentHealth <= 0)

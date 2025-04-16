@@ -53,12 +53,12 @@ public class ImpactOnPlayer : MonoBehaviour
         {
             StartCoroutine(ResetStunnedAfterDelay(this, 5f));
         }
-        if (canClimbing==false)
+        if (!canClimbing)
         {
             rb.gravityScale = startgravityScale;
         }
 
-        if (isTouchingWall && wallContactTime > 0.5f && playerMovement.isGrounded == false)
+        if (isTouchingWall && wallContactTime > 0.5f && !playerMovement.isGrounded )
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, -2);
             isSliding = true;
@@ -75,14 +75,14 @@ public class ImpactOnPlayer : MonoBehaviour
     void OnCollisionStay2D(Collision2D collision)
     {
         // Kiểm tra va chạm với tường
-        if (collision.gameObject.CompareTag("Wall") && playerMovement.isGrounded==false)
+        if (collision.gameObject.CompareTag("Wall") && !playerMovement.isGrounded)
         {
             wallContactTime += Time.deltaTime;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Wall") && playerMovement.isGrounded == false)
+        if (collision.gameObject.CompareTag("Wall") && !playerMovement.isGrounded)
         {
             isTouchingWall = true;
            
@@ -98,25 +98,36 @@ public class ImpactOnPlayer : MonoBehaviour
             wallContactTime = 0;
         }
     }
-    public IEnumerator beSlowed(Transform coltrans)
+    public IEnumerator beSlowed()
     {
-        var impact = coltrans.gameObject.GetComponentInChildren<ImpactOnPlayer>();
-        if (impact == null) yield break; // Thoát sớm nếu không tìm thấy ImpactOnPlayer
+        //var impact = coltrans.gameObject.GetComponentInChildren<ImpactOnPlayer>();
+        //if (impact == null) yield break; // Thoát sớm nếu không tìm thấy ImpactOnPlayer
 
-        var plyerMovement = impact.playerMovement;
-        if (plyerMovement == null) yield break; // Thoát nếu không có PlayerMovement
+        //var plyerMovement = impact.playerMovement;
+        //if (plyerMovement == null) yield break; // Thoát nếu không có PlayerMovement
 
-        plyerMovement.PlayerColor.color= Color.green;
-        plyerMovement.moveSpeed -=0.4f;
+        playerMovement.PlayerColor.color= Color.green;
+        playerMovement.moveSpeed -=0.4f;
         isSlowed = true;
         yield return new WaitForSeconds(10f);
         Debug.Log("hết time");
-        plyerMovement.moveSpeed = plyerMovement.startmoveSpeed;
+        playerMovement.moveSpeed = playerMovement.startmoveSpeed;
         isSlowed = false;
-        plyerMovement.PlayerColor.color = plyerMovement.originalColor;
+        playerMovement.PlayerColor.color = playerMovement.originalColor;
 
     }
-    public void startSlowed(Transform coltrans)
+    public void refreshYourSelf()
+    {
+        StopAllCoroutines();
+        playerMovement.moveSpeed = playerMovement.startmoveSpeed;// trường hợp captain
+        playerMovement.jumpForce = playerMovement.startjumpForce;
+        playerMovement.PlayerColor.color = playerMovement.originalColor;
+        isSlowed = false;
+        isKnockback = false;
+        isStunned = false;
+        
+    }
+    public void startSlowed()
     {
         if (currSlowedCorou != null)
         {
@@ -125,7 +136,7 @@ public class ImpactOnPlayer : MonoBehaviour
             currSlowedCorou = null;
         }
         //Debug.Log(currSlowedCorou?.ToString());
-        currSlowedCorou = StartCoroutine(beSlowed(coltrans));
+        currSlowedCorou = StartCoroutine(beSlowed());
     }
     public IEnumerator ResetKnockbackAfterDelay(ImpactOnPlayer impact, float delay)
     {

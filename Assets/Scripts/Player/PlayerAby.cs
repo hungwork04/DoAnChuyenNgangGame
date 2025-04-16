@@ -13,7 +13,7 @@ public class PlayerAby : MonoBehaviour
     public float scanRadius = 0.65f;
 
     public bool isholdBomb=false;
-    public bool isCanTakeBomb=false;
+    public bool isCanTakeObj=false;
     public bool isCanOpenDoor=false;
     public bool isPressButton=false;
 
@@ -21,12 +21,16 @@ public class PlayerAby : MonoBehaviour
     //public BombSpawner bombSpawner;
     public Transform Ava;
     public Transform TeleDoor;
-
+    public PlayerInventory inventory;
     public PlayerPowerBar playerPowerBar;
     private void Awake()
     {
         //bombSpawner = FindObjectOfType<BombSpawner>();
-        if(Ava==null) Ava = this.transform.parent.GetComponentInChildren<playerAvatar>().transform;
+        if(inventory == null)
+        {
+            inventory = transform.parent.GetComponentInChildren<PlayerInventory>();
+        }
+        if (Ava==null) Ava = this.transform.parent.GetComponentInChildren<playerAvatar>().transform;
         if (holdBombPos != null) return;
         holdBombPos=transform.Find("HoldBombPos").GetComponent<Transform>();
     }
@@ -38,32 +42,43 @@ public class PlayerAby : MonoBehaviour
     {
         checkDKHoldBomb();
         checkPressbutton();
-        //takeBomb();
-        //throwBomb();
     }
     public void checkDKHoldBomb()
     {
+        // Nếu không có Object hoặc object đó không còn active trong scene nữa
         if (Object == null || !Object.transform.parent.gameObject.activeSelf)
         {
+            // Không còn giữ bomb nữa và reset Object về null
             isholdBomb = false;
             Object = null;
             return;
         }
-        if (isholdBomb == true)
+
+        // Nếu đang giữ bomb
+        if (isholdBomb)
         {
-            isCanTakeBomb = false;
-        }else if (isholdBomb == false && Object!=null)
+            // Không thể lấy object nữa
+            isCanTakeObj = false;
+        }
+        // Nếu không giữ bomb và đang có Object khả dụng
+        else if (!isholdBomb && Object != null)
         {
-            isCanTakeBomb = true;
+            // Có thể lấy object
+            isCanTakeObj = true;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("bomb"))
+        if (collision.CompareTag("Ruou") && inventory.canAdd())
+        {
+            if (Object != null) return;
+            Object = collision.gameObject;
+        }
+        else if (collision.CompareTag("bomb"))
         {
             if (isholdBomb) return;
-            isCanTakeBomb = true;
+            isCanTakeObj = true;
             if (Object != null) return;
             Object = collision.gameObject;
             //Debug.Log("co bom");
@@ -72,11 +87,11 @@ public class PlayerAby : MonoBehaviour
    
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("bomb"))
+        if (collision.CompareTag("bomb") || collision.CompareTag("Ruou"))
         {
             if (isholdBomb) return;
-            isCanTakeBomb = CheckForBombColliders();//Phải check xung quanh sau khi rời khỏi quả bomb phòng trường hợp rời bomb mà vẫn còn quả khác dưới chân
-            if (isCanTakeBomb) return;
+            isCanTakeObj = CheckForBombColliders();//Phải check xung quanh sau khi rời khỏi quả bomb phòng trường hợp rời bomb mà vẫn còn quả khác dưới chân
+            if (isCanTakeObj) return;
             //Debug.Log("k co bom");
             Object = null;//phòng trường hợp bomb ném đi rồi ấn nhặt bomb quay về người
         }
@@ -88,7 +103,7 @@ public class PlayerAby : MonoBehaviour
 
         foreach (Collider2D collider in colliders)
         {
-            if (collider.CompareTag("bomb"))
+            if (collider.CompareTag("bomb") || (collider.CompareTag("Ruou")&&inventory.canAdd()))
             {
                 //Debug.Log("quet xung quanh");
                 Object = collider.gameObject;
@@ -97,10 +112,41 @@ public class PlayerAby : MonoBehaviour
         }
         return false;
     }
-
+    
     public void takeObj()
     {
         if (Object == null) return;
+        if (Object.CompareTag("Ruou"))
+        {
+            ItemDefault itemToAdd = Object.GetComponentInParent<ItemDefault>();
+            if (itemToAdd == null) return;
+
+            if (inventory)
+            {
+                var items = inventory.items;
+                int count = items.Count;
+                UpdatePLayerTag updatePLayerTag = inventory.playertag.GetComponent<UpdatePLayerTag>();
+
+                for (int i = 0; i < count; i++)
+                {
+                    if (items[i] == null)
+                    {
+                        items[i] = itemToAdd;
+                        Object.transform.parent.gameObject.SetActive(false);
+
+                        updatePLayerTag?.setItemtagUi(i);
+                        return;
+                    }
+                }
+
+                if (count >= 3) return;
+
+                items.Add(itemToAdd);
+                Object.transform.parent.gameObject.SetActive(false);
+
+                updatePLayerTag?.setItemtagUi(items.Count - 1);
+            }
+        }
         //Debug.Log(Object.transform.parent?.name);
         playerAvatar thisAva = Ava.GetComponent<playerAvatar>();
         if (thisAva?.index == 5)//character 6
@@ -140,6 +186,7 @@ public class PlayerAby : MonoBehaviour
     {
         if (!isholdBomb||Ava.GetComponent<playerAvatar>()?.index==5) return; // Không làm gì nếu đang không  giữ bom
         playerPowerBar.SetMaxHealth(maxThrowForce);
+        if(!Object.GetComponent<Collider2D>().CompareTag("bomb")) return;
         if (context.started) // Khi người chơi bắt đầu giữ nút
         {
             holdTime = 0f; // Đặt lại thời gian giữ
