@@ -9,7 +9,7 @@ public class EffForBullet : BombEffected
         //Debug.Log("có va chạm");
         if ((targetLayers.value & (1 << collision.gameObject.layer)) != 0)
         {
-            Debug.Log("Triggered effectImpact");
+            //Debug.Log("Triggered effectImpact");
             effectImpact(collision);
         }
     }
@@ -48,7 +48,7 @@ public class EffForBullet : BombEffected
                         {
                             impact.startSlowed();
                         }
-                        Debug.Log("trừ máu " + health.gameObject);
+                        //Debug.Log("trừ máu " + health.gameObject);
                     }
                 }
 

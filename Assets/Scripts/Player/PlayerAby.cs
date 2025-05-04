@@ -151,10 +151,10 @@ public class PlayerAby : MonoBehaviour
         playerAvatar thisAva = Ava.GetComponent<playerAvatar>();
         if (thisAva?.index == 5)//character 6
         {
-            Object.transform.parent.GetComponentInChildren<BombController>()?.despawnBomb();
+            Object.transform.parent.GetComponentInChildren<BombController>()?.DespawnBomb();
             thisAva.playerMovement.ani.SetTrigger("isTakeBomb");
             thisAva.avatarList[5].GetComponentInChildren<ShootingBullet>().bulletNum++;
-            Debug.Log("+1");
+            //Debug.Log("+1");
             return;
         }
             Object.transform.parent.SetParent(holdBombPos);

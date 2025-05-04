@@ -6,8 +6,11 @@ public class EffectType2 : BombEffected
 {
     protected override void OnEnable()
     {
+        // Gọi OnEnable của lớp cha để kế thừa các chức năng
+        base.OnEnable();
+
+        // Thực hiện các chức năng riêng của lớp con
         StartCoroutine(ExpandRadiusAndProcessLogic());
-        Invoke("destroyBom", 0.35f);
     }
     HashSet<Collider2D> processedColliders = new HashSet<Collider2D>(); // Để lọc các đối tượng đã quét
     //bomb choáng
@@ -43,7 +46,7 @@ public class EffectType2 : BombEffected
 
         foreach (Collider2D col in processedColliders)
         {
-            
+
             Transform coltrans = col.transform;
             // tìm Object ông nội.... chứa Rigidbody2d
             while (coltrans.parent != null && coltrans.GetComponent<Rigidbody2D>() == null)

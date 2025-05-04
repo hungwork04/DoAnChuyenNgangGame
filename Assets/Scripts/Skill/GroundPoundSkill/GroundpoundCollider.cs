@@ -26,10 +26,10 @@ public class GroundpoundCollider : MeleeColliderInteract
         playerMovement.isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0;
-        if (playerCol != null)
-        {
-            playerCol.usedByEffector = true;
-        }
+        //if (playerCol != null)
+        //{
+        //    playerCol.usedByEffector = true;
+        //}
         this.GetComponentInParent<ImpactOnPlayer>().SkillInUse.Add(1);
         rb.linearVelocity = new Vector2(0f, -dashingPower * 1.5f);
         
@@ -37,7 +37,7 @@ public class GroundpoundCollider : MeleeColliderInteract
         {
             yield return null;
         }
-        playerCol.usedByEffector = false;
+        //playerCol.usedByEffector = false;
         StopDash();
     }
     public LayerMask groundLayer;

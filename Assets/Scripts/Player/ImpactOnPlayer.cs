@@ -18,8 +18,9 @@ public class ImpactOnPlayer : MonoBehaviour
     public bool isUseSkill = false;
     public bool isClimbing = false;
     public bool isSlowed = false;
-    public bool isTouchingWall=false;
+    public bool isTouchingWall = false;
     public float wallContactTime = 0f;
+    public bool hasWallJumped = false;
 
     public List<int> SkillInUse = new List<int>();
 
@@ -85,26 +86,21 @@ public class ImpactOnPlayer : MonoBehaviour
         if (collision.gameObject.CompareTag("Wall") && !playerMovement.isGrounded)
         {
             isTouchingWall = true;
-           
+            // Reset biến hasWallJumped khi chạm tường mới
+            hasWallJumped = false;
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
-            playerMovement.hasDoubleJumped = false; // Reset double jump
-            playerMovement.isCanDoubleJump = true;
-            isTouchingWall=false;
+            // Không reset double jump ở đây nữa
+            isTouchingWall = false;
             wallContactTime = 0;
         }
     }
     public IEnumerator beSlowed()
     {
-        //var impact = coltrans.gameObject.GetComponentInChildren<ImpactOnPlayer>();
-        //if (impact == null) yield break; // Thoát sớm nếu không tìm thấy ImpactOnPlayer
-
-        //var plyerMovement = impact.playerMovement;
-        //if (plyerMovement == null) yield break; // Thoát nếu không có PlayerMovement
 
         playerMovement.PlayerColor.color= Color.green;
         playerMovement.moveSpeed -=0.4f;
@@ -162,8 +158,9 @@ public class ImpactOnPlayer : MonoBehaviour
     }
 
 
-    public void blockMove(float m,float j,bool eff)
+    public void blockMove(bool eff)
     {
+        //float m,float j,
         if (eff)
         {
             //Debug.Log("lockmove");

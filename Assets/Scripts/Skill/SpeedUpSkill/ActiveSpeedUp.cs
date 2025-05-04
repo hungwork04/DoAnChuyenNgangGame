@@ -11,11 +11,14 @@ public class ActiveSpeedUp : MonoBehaviour
     public SpriteRenderer playercol;
     public Color originCol;
     public Color rageColor = new Color(0.702f, 0.705f, 1f);
+    public Collider2D col2d;
     private void Start()
     {
         originCol=this.GetComponentInParent<SpriteRenderer>().color;
         startSpeed = playerMovement.startmoveSpeed;
+        col2d = this.GetComponentInParent<Collider2D>();
         auraObj.SetActive(false);
+        col2d.enabled = false;
     }
     public IEnumerator speedUp(float remainTime,int time)
     {
@@ -25,6 +28,7 @@ public class ActiveSpeedUp : MonoBehaviour
         this.GetComponentInParent<ImpactOnPlayer>().SkillInUse.Add(1);
         this.GetComponentInParent<Animator>().SetBool("isSpeedUp", true);
         playerMovement.moveSpeed = time*startSpeed;
+        col2d.enabled = true;
         yield return new WaitForSeconds(remainTime);
         endSkill();
 
@@ -37,6 +41,15 @@ public class ActiveSpeedUp : MonoBehaviour
         this.GetComponentInParent<Animator>().SetBool("isSpeedUp", false);
         this.GetComponentInParent<ImpactOnPlayer>().SkillInUse.Remove(1);
         auraObj.SetActive(false);
+        col2d.enabled = false;
         playercol.color = originCol;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("canbeharm"))
+        {
+            collision.gameObject.GetComponent<ImpactOnPlayer>().blockMove(true);
+            collision.gameObject.GetComponent<ImpactOnPlayer>().isKnockback = true;
+        }
     }
 }

@@ -14,7 +14,7 @@ public class PlayerTagUI : MonoBehaviour
         {
             for (int i = 0; i < PlayerJoinManager.instance.danhsach.Count; i++)
             {
-                Vector3 newPos= new Vector3(startPos.position.x + i* 4.3f,startPos.position.y, startPos.position.z);
+                Vector3 newPos= new Vector3(startPos.position.x + i* 4.7f,startPos.position.y, startPos.position.z);
                 GameObject newTag = Instantiate(playerTag, newPos, Quaternion.identity);
 
                 var tag = newTag.GetComponent<UpdatePLayerTag>();

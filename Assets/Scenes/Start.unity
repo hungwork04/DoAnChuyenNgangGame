@@ -4791,7 +4791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &521885123
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4890,6 +4890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ani: {fileID: 804611307}
   thumbani: {fileID: 0}
+  loadtime: 10
 --- !u!1 &526155007
 GameObject:
   m_ObjectHideFlags: 0

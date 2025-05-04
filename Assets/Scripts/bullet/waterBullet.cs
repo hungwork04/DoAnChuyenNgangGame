@@ -32,7 +32,7 @@ public class waterBullet : MonoBehaviour
 
                 // Tạo hiệu ứng nổ tại điểm va chạm và sao chép localScale từ viên đạn
                 GameObject eff = Instantiate(bulletExplose, lastPoint, Quaternion.identity);
-                Debug.Log("Điểm va chạm: " + collision);
+                //Debug.Log("Điểm va chạm: " + collision);
                 isSpawn = true;
                 // Đảm bảo hiệu ứng nổ có cùng localScale với viên đạn
                 eff.transform.localScale = bulletScale;

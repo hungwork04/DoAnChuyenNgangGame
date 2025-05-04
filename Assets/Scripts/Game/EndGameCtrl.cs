@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -26,6 +27,7 @@ public class EndGameCtrl : MonoBehaviour
             Time.timeScale = 1f;
         });
     }
+    
     private void Update()
     {
         if (players.Count <= 1 && gameStopped == false)
@@ -36,7 +38,7 @@ public class EndGameCtrl : MonoBehaviour
     private IEnumerator StopGameAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Debug.LogWarning("hể");
+        //Debug.LogWarning("hể");
         endgameUI?.SetActive(true);
         //Time.timeScale = 0f;
         gameStopped = true;

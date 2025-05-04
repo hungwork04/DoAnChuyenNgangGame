@@ -72,22 +72,18 @@ public class SelectCharaterUI : MonoBehaviour
         if (i > 0)
         {
             currentCharractIndex++;
-            //int validateIndex = currentCharractIndex;
             if (currentCharractIndex > 5)
             {
                 currentCharractIndex = 0;
-                //validateIndex = currentCharractIndex - 1;
             }
             PlayerCharacter.sprite = sprites[currentCharractIndex];
         }
         else
         {
             currentCharractIndex--;
-            //int validateIndex = currentCharractIndex;
             if (currentCharractIndex < 0)
             {
                 currentCharractIndex = 5;
-                //validateIndex = currentCharractIndex - 1;
             }
             PlayerCharacter.sprite = sprites[currentCharractIndex];
 
@@ -109,12 +105,30 @@ public class SelectCharaterUI : MonoBehaviour
                 currentCharractIndex = ava.index;
             }
             catch (ArgumentOutOfRangeException) {
-                Debug.Log("chuaw ton tai!!");
+                loadAllPlayerOnScreen();
+                Debug.Log("chua ton tai!!");
                 return;
             }
             //Debug.Log("hể");
         }
     }
+    public void loadAllPlayerOnScreen()
+    {
+        PlayerHealth[] screenPlayer = FindObjectsByType<PlayerHealth>(FindObjectsSortMode.None);
+        Debug.Log("load!!");
+        var playerlist = PlayerJoinManager.instance.danhsach;
+        for (int i = 0; i < screenPlayer.Length; i++)
+        {
+            if (!playerlist.Contains(screenPlayer[i].gameObject))
+            {
+                playerlist.Add(screenPlayer[i].gameObject);
+                Debug.Log("Thêm player lỗi");
+
+            }
+        }
+    }
+
+
     public void chooseCharacter()
     {
         if (selectedPlayerBtn == null || selectedPlayerBtn.GetComponentInChildren<TextMeshProUGUI>().text=="NULL") return;

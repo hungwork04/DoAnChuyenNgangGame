@@ -26,8 +26,14 @@ public class EffectType3 : BombEffected
 
     protected override void OnEnable()
     {
+        // Gọi OnEnable của lớp cha để kế thừa các chức năng
+        base.OnEnable();
+        if (explodeEffect != null)
+        {
+            explodeEffect.enabled = true;
+        }
+        // Thực hiện các chức năng riêng của lớp con
         StartCoroutine(ExploseBom3());
-        Invoke("destroyBom", 0.3f);
     }
 
     public IEnumerator ExploseBom3()

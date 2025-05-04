@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
@@ -77,8 +78,14 @@ public class PlayerSpawnManager : MonoBehaviour
                 InputDevice device = playerInfo.device;
                 if (device != null)
                 {
-                    
-                    playerInput.SwitchCurrentControlScheme(device);
+                    try
+                    {
+                        playerInput.SwitchCurrentControlScheme(device);
+                    }
+                    catch (ArgumentException)
+                    {
+                        Debug.Log("lỗi kết nối thiết bị");
+                    }
 
                     //Debug.Log($"Player {playerInfo.playerIndex} sử dụng thiết bị {device.displayName}");
                 }

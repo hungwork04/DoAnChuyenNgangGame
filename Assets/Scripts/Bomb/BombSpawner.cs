@@ -28,7 +28,7 @@ public class BombSpawner : MonoBehaviour
         StartSpawningBombs();
 
         spawnCounts = new int[zoneCount];
-        StartCoroutine(SpawnBomb(1f)); // Hoặc delay tùy bạn
+        StartCoroutine(SpawnBomb(1f)); 
     }
 
     private void Update()
@@ -156,9 +156,9 @@ public class BombSpawner : MonoBehaviour
 
                 Transform spawnPoint = RandomPos(st, end);
 
-                // Dịch chuyển trục X ngẫu nhiên trong khoảng từ 0.01 đến 0.03
+                // Dịch chuyển trục X ngẫu nhiên trong khoảng
                 Vector3 newPosition = spawnPoint.position;
-                newPosition.x += Random.Range(-0.1f, 0.15f);
+                newPosition.x += Random.Range(-0.1f, 0.2f);
                 //Debug.Log(newPosition.x);
                 // Áp dụng vị trí và xoay (rotation) cho đối tượng
                 obj.transform.position = newPosition;

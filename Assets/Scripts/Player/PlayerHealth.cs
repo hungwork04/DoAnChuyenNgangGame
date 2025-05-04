@@ -30,6 +30,7 @@ public class PlayerHealth : MonoBehaviour
         plerAva = this.GetComponentInChildren<playerAvatar>();
         playerCollider = plerAva.avatarList[plerAva.index].GetComponent<Collider2D>();
         IsDead = false;
+        healingEff.SetActive(false);
     }
     public bool wasInviciable= false;
     public void takeDame(float Damage)
@@ -48,10 +49,11 @@ public class PlayerHealth : MonoBehaviour
     {
         StartCoroutine(BuffOverTime(healValue));
     }
+    public GameObject healingEff;
     public IEnumerator BuffOverTime(float healValue)
     {
         float allHeal = healValue;
-
+        healingEff?.SetActive(true);
         while (allHeal > 0)
         {
             if (currentHealth <= 0) yield break;
@@ -72,6 +74,7 @@ public class PlayerHealth : MonoBehaviour
             healthBar.SetHealth(currentHealth);
             yield return new WaitForSeconds(0.1f);
         }
+        healingEff?.SetActive(false);
     }
     private void Update()
     {

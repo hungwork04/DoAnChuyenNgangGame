@@ -4,6 +4,8 @@ using static Unity.Burst.Intrinsics.X86;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [HideInInspector] public bool isTeleportCooldown = false;
+
     public float moveSpeed = 5f;    // Tốc độ di chuyển
     public float jumpForce = 8f;   // Lực nhảy
     public float startmoveSpeed;
@@ -21,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
     public bool isFalling = false;
     public bool isDashing = false;
     public float originMass;
-
     private Vector2 movementInput;
     public PlayerAby playerAby;
     public SpriteRenderer PlayerColor;
@@ -66,12 +67,12 @@ public class PlayerMovement : MonoBehaviour
         if (impactOnPlayer.isKnockback)
         {
             //Debug.Log("khoa di chuyen");
-            impactOnPlayer.blockMove(startmoveSpeed, startjumpForce, impactOnPlayer.isKnockback);
+            impactOnPlayer.blockMove( impactOnPlayer.isKnockback);
 
         }
         else
         {
-            impactOnPlayer.blockMove(startmoveSpeed, startjumpForce, impactOnPlayer.isKnockback);
+            impactOnPlayer.blockMove( impactOnPlayer.isKnockback);
         }
     }
     private void FixedUpdate()
@@ -85,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
         if (impactOnPlayer.isStunned)
         {
             //impactOnPlayer.Stun();
-            impactOnPlayer.blockMove(startmoveSpeed,startjumpForce,impactOnPlayer.isStunned);
+            impactOnPlayer.blockMove(impactOnPlayer.isStunned);
             rb.mass = 10f;
             ChangeToColor(Color.Lerp(Color.blue, Color.white, 0.5f));
             //Debug.Log("3");
@@ -93,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 //impactOnPlayer.Unstun();
                 impactOnPlayer.isStunned = false;
-                impactOnPlayer.blockMove(startmoveSpeed, startjumpForce, impactOnPlayer.isStunned);
+                impactOnPlayer.blockMove( impactOnPlayer.isStunned);
                 rb.mass = originMass;
                 ResetColor();
             }
@@ -101,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             //impactOnPlayer.Unstun();
-            impactOnPlayer.blockMove(startmoveSpeed, startjumpForce, impactOnPlayer.isStunned);
+            impactOnPlayer.blockMove(impactOnPlayer.isStunned);
             rb.mass = originMass;
             ResetColor();
         }
@@ -154,26 +155,33 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded)
         {
-            // Nếu đang ở trên mặt đất, thực hiện nhảy và reset trạng thái double jump
+            // Nhảy bình thường khi ở mặt đất
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-            hasDoubleJumped = false; // Reset double jump
+            hasDoubleJumped = false;
             isCanDoubleJump = true;
+            // Reset wall jump khi chạm đất
+            impactOnPlayer.hasWallJumped = false;
+        }
+        else if (impactOnPlayer.isTouchingWall && !impactOnPlayer.hasWallJumped)
+        {
+            // Wall jump - chỉ cho phép 1 lần
+            rb.linearVelocity = new Vector2(-Mathf.Sign(playerAvatar.transform.localScale.x) * 8, jumpForce);
+            impactOnPlayer.wallContactTime = 0f;
+            impactOnPlayer.hasWallJumped = true; // Đánh dấu đã wall jump
+            
+            // Reset double jump khi wall jump
+            hasDoubleJumped = false;
+            isCanDoubleJump = true;
+            
+            Debug.Log("Wall jump");
         }
         else if (isCanDoubleJump && !hasDoubleJumped && !isGrounded)
         {
-            // Nếu không ở trên mặt đất nhưng có thể double jump và chưa sử dụng double jump
+            // Double jump bình thường
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-            hasDoubleJumped = true; // Đánh dấu đã double jump
+            hasDoubleJumped = true;
             isCanDoubleJump = false;
         }
-        else if (impactOnPlayer.isTouchingWall)
-        {
-            rb.linearVelocity = new Vector2(-Mathf.Sign(playerAvatar.transform.localScale.x) * 8, jumpForce);
-            impactOnPlayer.wallContactTime = 0f; // Reset thời gian va chạm
-            Debug.Log("bật lùi");
-            //SetMovementInput(Vector2.zero);
-        }
-
     }
 
     private void CheckJumpAndFallAni()
@@ -235,8 +243,8 @@ public class PlayerMovement : MonoBehaviour
             if(impactOnPlayer.isClimbing==false) return;
             rb.gravityScale=0;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, impactOnPlayer.climbSpeed);
-        }
-
+        }else 
+            impactOnPlayer.isClimbing = false;
     }
 
 }

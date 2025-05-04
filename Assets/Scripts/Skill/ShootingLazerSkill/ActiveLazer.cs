@@ -102,7 +102,7 @@ public class ActiveLazer : MonoBehaviour
 
             Draw2DRay(laserFirePoint.position, _hit.point);
             //Debug.Log(_hit.collider);
-            if (_hit.collider.transform.parent.GetComponentInParent<PlayerHealth>())
+            if (_hit.collider.transform?.parent?.GetComponentInParent<PlayerHealth>())
             {
 
                 currentTarget = _hit.collider.transform.parent.GetComponentInParent<PlayerHealth>();

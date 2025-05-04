@@ -81,7 +81,7 @@ public class PlayerJoinManager : MonoBehaviour
     public TextMeshProUGUI warnText;
     public void StartGame()
     {
-        if (currentPlayerCount >= 1)
+        if (currentPlayerCount > 0)
         {
             //Debug.Log("Game bắt đầu! Không thể thêm người chơi mới.");
 

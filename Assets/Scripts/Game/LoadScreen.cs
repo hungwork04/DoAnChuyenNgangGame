@@ -5,6 +5,7 @@ public class LoadScreen : MonoBehaviour
 {
     public Animator ani;
     public Animator thumbani;
+    public float loadtime = 10f;
     private void OnEnable()
     {
         this.gameObject.SetActive(true);
@@ -13,7 +14,7 @@ public class LoadScreen : MonoBehaviour
     private void Start()
     {
 
-        StartCoroutine(loadSceneTime(10));
+        StartCoroutine(loadSceneTime(loadtime));
     }
 
     public IEnumerator loadSceneTime(float loadTime)
@@ -28,10 +29,8 @@ public class LoadScreen : MonoBehaviour
         {
             thumbani.updateMode = AnimatorUpdateMode.UnscaledTime;
         }
-        Debug.Log("truocxws dung");
 
         Time.timeScale = 0f;
-        Debug.Log("sau dung");
 
         if (ani != null)
         {
@@ -41,10 +40,8 @@ public class LoadScreen : MonoBehaviour
         {
             thumbani.Play("thumbnail1Ani", 0, 0f); // chạy từ đầu 100%
         }
-        Debug.Log("he");
         yield return new WaitForSecondsRealtime(loadTime);
         Time.timeScale = 1f;
         this.gameObject.SetActive(false);
-        Debug.Log("he");
     }
 }
