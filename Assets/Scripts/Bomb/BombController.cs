@@ -63,6 +63,13 @@ public class BombController : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         this.transform.parent.GetComponent<Collider2D>().isTrigger = false;
 
+        // Reset các giá trị khác nếu cần
+        if (countdownCoroutine != null)
+        {
+            StopCoroutine(countdownCoroutine);
+            countdownCoroutine = null;
+        }
+        
         //StartCoroutine(CountdownAndExplode());
         //isOn = true;
     }
@@ -170,4 +177,45 @@ public class BombController : MonoBehaviour
         transform.parent.gameObject.SetActive(false);
     }
 
+    // Thêm phương thức ResetBomb để có thể gọi từ bên ngoài
+    public void ResetBomb()
+    {
+        // Reset thời gian đếm ngược
+        currentTime = startCountdowntime;
+        if (BombTimeText != null)
+        {
+            BombTimeText.text = currentTime.ToString();
+        }
+        
+        // Reset số lần va đập
+        bombLife = 3;
+        
+        // Reset trạng thái
+        isOn = false;
+        
+        // Hủy coroutine đếm ngược nếu đang chạy
+        if (countdownCoroutine != null)
+        {
+            StopCoroutine(countdownCoroutine);
+            countdownCoroutine = null;
+        }
+        
+        // Reset màu sắc
+        ResetColor();
+        
+        // Reset vật lý
+        if (rb != null)
+        {
+            rb.bodyType = RigidbodyType2D.Dynamic;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            rb.linearVelocity = Vector2.zero;
+        }
+        
+        // Reset collider
+        Collider2D collider = transform.parent.GetComponent<Collider2D>();
+        if (collider != null)
+        {
+            collider.isTrigger = false;
+        }
+    }
 }

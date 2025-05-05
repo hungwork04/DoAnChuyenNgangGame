@@ -122,6 +122,10 @@ public class BombEffected : MonoBehaviour
     protected virtual void OnDisable()
     {
         processedRigidbodies.Clear();
+        // Hủy tất cả các Invoke đang chờ
+        CancelInvoke();
+        // Dừng tất cả các coroutine đang chạy
+        StopAllCoroutines();
     }
 
     protected void ReturnToPool()
@@ -140,6 +144,11 @@ public class BombEffected : MonoBehaviour
             // Nếu không có EffectBombPooler, hủy đối tượng như cũ
             Destroy(transform.parent.gameObject);
         }
+    }
+
+    public void ClearProcessedRigidbodies()
+    {
+        processedRigidbodies.Clear();
     }
 
 }

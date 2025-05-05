@@ -121,7 +121,6 @@ public class ImpactOnPlayer : MonoBehaviour
         isSlowed = false;
         isKnockback = false;
         isStunned = false;
-        
     }
     public void startSlowed()
     {
