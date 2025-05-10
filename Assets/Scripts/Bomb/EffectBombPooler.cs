@@ -94,27 +94,27 @@ public class EffectBombPooler : MonoBehaviour
     // Trả một effect bomb về pool
     public void ReturnToPool(GameObject effectBomb)
     {
-        Debug.Log("EffectBombPooler.ReturnToPool called for " + effectBomb.name);
+ //       Debug.Log("EffectBombPooler.ReturnToPool called for " + effectBomb.name);
 
         // Reset các component nếu cần
         ResetEffectBomb(effectBomb);
 
         // Ẩn effect bomb
         effectBomb.SetActive(false);
-        Debug.Log("Effect bomb set to inactive: " + effectBomb.name);
+//        Debug.Log("Effect bomb set to inactive: " + effectBomb.name);
     }
 
     // Reset các component của effect bomb
     private void ResetEffectBomb(GameObject effectBomb)
     {
-        Debug.Log("Resetting effect bomb components for " + effectBomb.name);
+//        Debug.Log("Resetting effect bomb components for " + effectBomb.name);
 
         // Reset các component PointEffector2D nếu có
         PointEffector2D[] pointEffectors = effectBomb.GetComponentsInChildren<PointEffector2D>(true);
         foreach (PointEffector2D effector in pointEffectors)
         {
             effector.enabled = false;
-            Debug.Log("Disabled PointEffector2D on " + effector.gameObject.name);
+ //           Debug.Log("Disabled PointEffector2D on " + effector.gameObject.name);
         }
 
         // Reset các component BombEffected
@@ -123,7 +123,7 @@ public class EffectBombPooler : MonoBehaviour
         {
             // Hủy bỏ các Invoke đang chờ
             effect.CancelInvoke();
-            Debug.Log("Cancelled Invokes on BombEffected " + effect.gameObject.name);
+//            Debug.Log("Cancelled Invokes on BombEffected " + effect.gameObject.name);
         }
 
         // Có thể thêm các reset khác nếu cần

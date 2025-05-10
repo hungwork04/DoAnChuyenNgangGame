@@ -800,6 +800,7 @@ MonoBehaviour:
   isSlowed: 0
   isTouchingWall: 0
   wallContactTime: 0
+  hasWallJumped: 0
   SkillInUse: 
   playerMovement: {fileID: 5110314966547385146}
   oldOffset: {x: -0.04528441, y: -0.07788933}
@@ -1232,7 +1233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9171338149722616924
 Transform:
   m_ObjectHideFlags: 0
@@ -1399,6 +1400,7 @@ MonoBehaviour:
   isSlowed: 0
   isTouchingWall: 0
   wallContactTime: 0
+  hasWallJumped: 0
   SkillInUse: 
   playerMovement: {fileID: 5110314966547385146}
   oldOffset: {x: 0.04800017, y: -0.04189011}
@@ -2307,7 +2309,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5887217174569397103
 Transform:
   m_ObjectHideFlags: 0
@@ -2428,6 +2430,7 @@ MonoBehaviour:
   isSlowed: 0
   isTouchingWall: 0
   wallContactTime: 0
+  hasWallJumped: 0
   SkillInUse: 
   playerMovement: {fileID: 5110314966547385146}
   oldOffset: {x: 0.02, y: -0.03055559}
@@ -2469,7 +2472,7 @@ BoxCollider2D:
   m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.02, y: -0.030555591}
+  m_Offset: {x: 0.06734379, y: -0.030555591}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2479,7 +2482,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.550146, y: 0.40139315}
+  m_Size: {x: 0.42252347, y: 0.40139315}
   m_EdgeRadius: 0
 --- !u!251 &7856981402637764440
 PlatformEffector2D:
@@ -2686,6 +2689,7 @@ MonoBehaviour:
   isSlowed: 0
   isTouchingWall: 0
   wallContactTime: 0
+  hasWallJumped: 0
   SkillInUse: 
   playerMovement: {fileID: 5110314966547385146}
   oldOffset: {x: 0, y: -0.03047627}
@@ -2931,6 +2935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ffd1e7719222224ca061dbd1d989196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTeleportCooldown: 0
   moveSpeed: 5
   jumpForce: 6
   startmoveSpeed: 0
@@ -3311,6 +3316,7 @@ MonoBehaviour:
   isSlowed: 0
   isTouchingWall: 0
   wallContactTime: 0
+  hasWallJumped: 0
   SkillInUse: 
   playerMovement: {fileID: 5110314966547385146}
   oldOffset: {x: -0.0258604, y: -0.03836793}
@@ -3509,6 +3515,7 @@ MonoBehaviour:
   isSlowed: 0
   isTouchingWall: 0
   wallContactTime: 0
+  hasWallJumped: 0
   SkillInUse: 
   playerMovement: {fileID: 5110314966547385146}
   oldOffset: {x: -0.0564614, y: -0.08139011}

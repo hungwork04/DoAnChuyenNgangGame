@@ -95,7 +95,14 @@ public class BombSpawner : MonoBehaviour
             spawnCounts[selectedZone]++;
         }
     }
-
+    private void ResetBombState(GameObject bombObj)
+    {
+    BombController bombController = bombObj.GetComponentInChildren<BombController>();
+    if (bombController != null)
+    {
+        bombController.ResetBomb();
+    }
+    }
     // Thuật toán chọn zone có ít bomb hơn (ngẫu nhiên có trọng số)
     private int GetBalancedZoneIndex()
     {
@@ -151,6 +158,9 @@ public class BombSpawner : MonoBehaviour
         {
             if (!obj.activeInHierarchy)
             {
+                // Reset trạng thái bomb trước khi kích hoạt
+                ResetBombState(obj);
+                
                 obj.SetActive(true);
                 obj.transform.parent = PoolingObj.transform;
 

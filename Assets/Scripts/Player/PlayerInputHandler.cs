@@ -38,11 +38,22 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         if (playerMovement.impactOnPlayer.isKnockback || playerMovement.impactOnPlayer.isStunned || playerMovement.isDashing) return;
-        if (playerMovement != null && context.performed)
+        
+        if (playerMovement != null)
         {
-            playerMovement.climbing();
-            if (playerMovement.impactOnPlayer.canClimbing) return;
-            playerMovement.Jump();
+            // Truyền trạng thái của phím nhảy (true nếu đang giữ, false nếu nhả)
+            bool isHoldingJumpKey = context.performed || context.started;
+            
+            // Kiểm tra xem có thể leo thang không
+            if (playerMovement.impactOnPlayer.canClimbing)
+            {
+                playerMovement.climbing(isHoldingJumpKey);
+            }
+            // Nếu không thể leo thang và phím được nhấn, thực hiện nhảy
+            else if (context.performed)
+            {
+                playerMovement.Jump();
+            }
         }
     }
     public void OnThrow(InputAction.CallbackContext context)

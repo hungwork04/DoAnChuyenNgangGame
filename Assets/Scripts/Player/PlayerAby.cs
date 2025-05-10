@@ -184,7 +184,7 @@ public class PlayerAby : MonoBehaviour
 
     public void throwObj(CallbackContext context)
     {
-        if (!isholdBomb||Ava.GetComponent<playerAvatar>()?.index==5) return; // Không làm gì nếu đang không  giữ bom
+        if (!isholdBomb||Ava.GetComponent<playerAvatar>()?.index==5) return; // Không làm gì nếu đang không  giữ bom hoặc đang là nhân vật whale
         playerPowerBar.SetMaxHealth(maxThrowForce);
         if(!Object.GetComponent<Collider2D>().CompareTag("bomb")) return;
         if (context.started) // Khi người chơi bắt đầu giữ nút
@@ -251,8 +251,22 @@ public class PlayerAby : MonoBehaviour
     {
         if (isPressButton)
         {
-            holdTime += Time.deltaTime * 1.2f;
-            if(holdTime * 14f>=maxThrowForce) return;
+            // Tăng thời gian giữ với tốc độ khác nhau dựa trên thời gian đã giữ
+            if (holdTime < 0.3)
+            {
+                // Tốc độ tăng bình thường trong 1 giây đầu
+                holdTime += Time.deltaTime * 1.2f;
+            }
+            else
+            {
+                // Tốc độ tăng nhanh hơn sau 1 giây
+                holdTime += Time.deltaTime * 2.5f; // Tăng hệ số từ 1.2f lên 2.5f
+            }
+            
+            // Kiểm tra để không vượt quá maxThrowForce
+            if(holdTime * 14f >= maxThrowForce) return;
+            
+            // Cập nhật thanh power
             playerPowerBar.SetHealth(holdTime * 14f);
         }
         else return;

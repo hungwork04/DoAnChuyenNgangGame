@@ -235,16 +235,29 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    public void climbing()
+    public void climbing(bool isHoldingJumpKey)
     {
         impactOnPlayer.isClimbing = true;
         if (impactOnPlayer.canClimbing)
         {
-            if(impactOnPlayer.isClimbing==false) return;
-            rb.gravityScale=0;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, impactOnPlayer.climbSpeed);
-        }else 
+            if (isHoldingJumpKey)
+            {
+                // Người chơi đang giữ phím nhảy và có thể leo thang
+                impactOnPlayer.isClimbing = true;
+                rb.gravityScale = 0;
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, impactOnPlayer.climbSpeed);
+            }
+            else
+            {
+                // Người chơi nhả phím nhảy, rơi xuống
+                impactOnPlayer.isClimbing = false;
+                rb.gravityScale = impactOnPlayer.startgravityScale;
+            }
+        }
+        else
+        {
+            // Không ở gần thang, đặt lại trạng thái
             impactOnPlayer.isClimbing = false;
+        }
     }
-
 }

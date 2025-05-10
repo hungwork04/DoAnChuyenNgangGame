@@ -43,5 +43,6 @@ public class LoadScreen : MonoBehaviour
         yield return new WaitForSecondsRealtime(loadTime);
         Time.timeScale = 1f;
         this.gameObject.SetActive(false);
+        AudioManager.instance.playBackGMusic();
     }
 }

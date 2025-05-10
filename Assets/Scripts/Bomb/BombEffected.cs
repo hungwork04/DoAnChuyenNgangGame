@@ -108,12 +108,12 @@ public class BombEffected : MonoBehaviour
         // Nếu effect bomb vẫn còn active, log cảnh báo và force deactivate
         if (gameObject.activeInHierarchy)
         {
-            Debug.LogWarning("Effect bomb still active after timeout: " + gameObject.name);
+//            Debug.LogWarning("Effect bomb still active after timeout: " + gameObject.name);
 
             // Force deactivate
             if (transform.parent != null)
             {
-                Debug.Log("Force deactivating effect bomb: " + transform.parent.gameObject.name);
+//                Debug.Log("Force deactivating effect bomb: " + transform.parent.gameObject.name);
                 transform.parent.gameObject.SetActive(false);
             }
         }
@@ -122,24 +122,33 @@ public class BombEffected : MonoBehaviour
     protected virtual void OnDisable()
     {
         processedRigidbodies.Clear();
+        // Hủy tất cả các Invoke đang chờ
+        CancelInvoke();
+        // Dừng tất cả các coroutine đang chạy
+        StopAllCoroutines();
     }
 
     protected void ReturnToPool()
     {
-        Debug.Log("ReturnToPool called for " + gameObject.name);
+//        Debug.Log("ReturnToPool called for " + gameObject.name);
 
         // Nếu EffectBombPooler tồn tại, trả effect bomb về pool
         if (EffectBombPooler.instance != null)
         {
-            Debug.Log("Using EffectBombPooler to return to pool");
+//            Debug.Log("Using EffectBombPooler to return to pool");
             EffectBombPooler.instance.ReturnToPool(transform.parent.gameObject);
         }
         else
         {
-            Debug.Log("No EffectBombPooler found, destroying object");
+//            Debug.Log("No EffectBombPooler found, destroying object");
             // Nếu không có EffectBombPooler, hủy đối tượng như cũ
             Destroy(transform.parent.gameObject);
         }
+    }
+
+    public void ClearProcessedRigidbodies()
+    {
+        processedRigidbodies.Clear();
     }
 
 }

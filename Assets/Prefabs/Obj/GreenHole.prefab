@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 939723953605183014}
   - component: {fileID: 6172500982640715055}
   - component: {fileID: 7480485765467114945}
-  - component: {fileID: 7194827916205817073}
   - component: {fileID: 2588192641489952959}
   m_Layer: 0
   m_Name: GreenHole
@@ -126,19 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   otherHole: {fileID: 0}
---- !u!114 &7194827916205817073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1907298608385532043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f256cdbdcbbf9c4da0e4f026db91e92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  otherHole: {fileID: 0}
+  canTeleport: 1
 --- !u!70 &2588192641489952959
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
