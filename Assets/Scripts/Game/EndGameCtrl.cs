@@ -10,6 +10,7 @@ public class EndGameCtrl : MonoBehaviour
     public Button playAgainbtn;
     public Button ExitToMenubtn;
     public GameObject endgameUI;
+    public int screenindex=1;
     public static EndGameCtrl instance;
     // Start is called before the first frame update
     public List<GameObject> players;
@@ -19,7 +20,7 @@ public class EndGameCtrl : MonoBehaviour
         instance = this;
         endgameUI.SetActive(false);
         playAgainbtn.onClick.AddListener(() => { 
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(screenindex);
             Time.timeScale = 1f;
         });
         ExitToMenubtn.onClick.AddListener(() => { 

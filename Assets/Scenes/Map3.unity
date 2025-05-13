@@ -1069,6 +1069,7 @@ MonoBehaviour:
   playAgainbtn: {fileID: 1694265652}
   ExitToMenubtn: {fileID: 1072412377}
   endgameUI: {fileID: 1115702510}
+  screenindex: 3
   players: []
   gameStopped: 0
 --- !u!4 &276260531
