@@ -36,7 +36,7 @@
                     "name": "Pick",
                     "type": "Button",
                     "id": "2be79e58-d23a-47b2-ac49-10669a18fb0d",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -45,7 +45,7 @@
                     "name": "NormalAttack",
                     "type": "Button",
                     "id": "e733ddb8-f600-4f7a-b3ce-301568e820d8",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -94,7 +94,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboad",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -105,7 +105,7 @@
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";GamePad",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -127,7 +127,7 @@
                     "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";GamePad",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -138,7 +138,7 @@
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";GamePad",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -160,7 +160,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboad",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -171,7 +171,40 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
+                    "groups": ";Keyboad",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "ArrowMove",
+                    "id": "c27eebe9-7f4e-47f7-9832-3bf1710ae7ad",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
                     "groups": "",
+                    "action": "Movement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Left",
+                    "id": "c9d79a0b-e149-4f01-81b2-8c5a9158d010",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Arrow",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Right",
+                    "id": "9561c6a7-222c-4b9d-a930-0bd5c7ea075b",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Arrow",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -182,7 +215,7 @@
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";GamePad",
                     "action": "Pick",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -193,7 +226,7 @@
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboad",
                     "action": "Pick",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -204,7 +237,7 @@
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboad",
                     "action": "NormalAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -215,7 +248,7 @@
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";GamePad",
                     "action": "NormalAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -226,7 +259,7 @@
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";GamePad",
                     "action": "Throw",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -237,7 +270,7 @@
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboad",
                     "action": "Throw",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -248,7 +281,7 @@
                     "path": "<Gamepad>/leftStick/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";GamePad",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -259,7 +292,7 @@
                     "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboad",
                     "action": "Attack2",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -270,7 +303,7 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";GamePad",
                     "action": "Attack2",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -281,7 +314,7 @@
                     "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboad",
                     "action": "UsingItem1",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -292,7 +325,7 @@
                     "path": "<Gamepad>/dpad/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";GamePad",
                     "action": "UsingItem1",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -303,7 +336,7 @@
                     "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboad",
                     "action": "UsingItem2",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -314,7 +347,7 @@
                     "path": "<Gamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";GamePad",
                     "action": "UsingItem2",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -325,7 +358,7 @@
                     "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboad",
                     "action": "UsingItem3",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -336,8 +369,56 @@
                     "path": "<Gamepad>/dpad/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";GamePad",
                     "action": "UsingItem3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "37246cb9-5756-41b5-ad9d-5d237d8b0c1d",
+            "actions": [
+                {
+                    "name": "Point",
+                    "type": "Value",
+                    "id": "902c24ad-93a7-43ee-a0b9-f5690b7f252f",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Click",
+                    "type": "PassThrough",
+                    "id": "80b9bbc4-e0cd-4c13-a86f-ea0b9faa096b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a05f838f-1071-431a-8cf2-dc0094158e84",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Mouse",
+                    "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "50631442-aa1c-41db-8b1e-ae792bface80",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": ";Mouse",
+                    "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -351,7 +432,7 @@
             "devices": [
                 {
                     "devicePath": "<Gamepad>",
-                    "isOptional": true,
+                    "isOptional": false,
                     "isOR": false
                 }
             ]
@@ -362,7 +443,18 @@
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
-                    "isOptional": true,
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Arrow",
+            "bindingGroup": "Arrow",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
                     "isOR": false
                 }
             ]

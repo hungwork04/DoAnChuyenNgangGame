@@ -46,7 +46,9 @@ public class PlayerJoinManager : MonoBehaviour
         playerInputManager.onPlayerJoined += OnPlayerJoined;
     }
 
-
+    public void loadScreenAbout(){
+        SceneManager.LoadScene("About");
+    }
     void Start()
     {
         if (warnText != null)
