@@ -36,7 +36,7 @@ public class PlayerHealth : MonoBehaviour
     public void takeDame(float Damage)
     {
         if (currentHealth<=0) return;
-        if (isInvincible) return;
+        if (isInvincible||!GameDataManager.instance.gameStarted) return;
         currentHealth -= Damage;
         healthBar.SetHealth(currentHealth);
         if(currentHealth <=50 && isInvincible == false && wasInviciable==false )
